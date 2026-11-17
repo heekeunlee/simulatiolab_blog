@@ -23,6 +23,7 @@
       setTimeout(() => (msg.textContent = ''), 2500);
     }));
   });
+  document.querySelectorAll('a.tz').forEach((a) => { if (a.dataset.date > T && !location.hash) a.removeAttribute('href'); });
   document.querySelectorAll('.pn a.nx').forEach((a) => { if (a.dataset.date > T && !location.hash) a.style.visibility = 'hidden'; });
 
   const L = document.getElementById('list'), D = document.getElementById('dash');

@@ -32,6 +32,7 @@ BLOG = '시뮬라티오 랩 블로그'
 KST = dt.timezone(dt.timedelta(hours=9))
 TODAY = dt.datetime.now(KST).date()
 WEEK = '월화수목금토일'
+PLAN = []
 
 
 def front(text):
@@ -90,6 +91,12 @@ def render(body, naver=False, base='', photos=None, extra=()):
         elif first.startswith('> '):
             t = inline(' '.join(x[2:] for x in b))
             h.append(f'<p style="text-align:center"><b><span style="font-size:19px">"{t}"</span></b></p>' if naver else f'<blockquote>{t}</blockquote>')
+        elif first.startswith('%% '):
+            title = inline(first[3:]); items = [inline(x[2:]) for x in b[1:] if x.startswith('- ')]
+            if naver:
+                h.append(f'<p><b><span style="font-size:17px;color:#1f9d63">💡 {title}</span></b></p>' + ''.join(f'<p>✔ {it}</p>' for it in items))
+            else:
+                h.append(f'<aside class="insight"><div class="ih">💡 {title}</div><ul>' + ''.join(f'<li>{it}</li>' for it in items) + '</ul></aside>')
         elif first.startswith('~~ '):
             t = inline(' '.join(b)[3:])
             h.append(f'<p><span style="font-size:13px;color:#888">{t}</span></p>' if naver else f'<p class="note">{t}</p>')
@@ -119,7 +126,7 @@ def render(body, naver=False, base='', photos=None, extra=()):
 def plain(body):
     t = re.sub(r'!\[.*?\]\(.*?\)', '', body)
     t = re.sub(r'^\{\{photo.*?\}\}$', '', t, flags=re.M)
-    t = re.sub(r'^(###|!!|>|~~|@@|-|\d+\.)\s*', '', t, flags=re.M)
+    t = re.sub(r'^(###|!!|>|~~|@@|%%|-|\d+\.)\s*', '', t, flags=re.M)
     t = re.sub(r'\*\*|\[|\]\(.*?\)', '', t)
     return re.sub(r'\s+', ' ', t).strip()
 
@@ -176,6 +183,18 @@ FOOT = '''<footer class="foot">시뮬라티오 랩 · Lab장 · <a href="https:/
 <script src="{base}app.js?v={ver}"></script></body></html>'''
 
 
+def teaser(meta, nxt, naver=False):
+    """다음 편 예고: front matter의 teaser + 다음 편 제목·공개일"""
+    if not meta.get('teaser') or not nxt: return ''
+    when = daystr(nxt['date'])
+    if naver:
+        return (f'<p><br></p><p style="text-align:center;color:#8b847a">· · ·</p><p><b><span style="font-size:17px;color:#7a5c3e">📮 다음 편 예고 · {when}</span></b></p>'
+                f'<p><b>{html.escape(nxt["title"])}</b></p><p>{inline(meta["teaser"])}</p><p><span style="color:#8b847a">이웃 추가해 두시면 새 글이 올라올 때 알려 드려요.</span></p>')
+    link = f'../{nxt["slug"]}/' if nxt.get('slug') else ''
+    head = f'<a href="{link}" class="tz" data-date="{nxt["date"]}">{html.escape(nxt["title"])}</a>' if link else html.escape(nxt['title'])
+    return f'<aside class="teaser"><div class="th">📮 다음 편 예고 · <span>{when}</span></div><div class="tt">{head}</div><p>{inline(meta["teaser"])}</p></aside>'
+
+
 def photo_box(meta):
     """글 페이지 #photos: ChatGPT에 줄 부탁 문구와 올릴 곳"""
     nn = f"{meta['no']:02d}"
@@ -201,6 +220,8 @@ def main():
     shutil.copytree(os.path.join(SRC, 'img'), os.path.join(OUT, 'img'))
     for f in ('style.css', 'app.js', 'index.html', 'dashboard.html'):
         shutil.copy(os.path.join(ROOT, 'web', f), os.path.join(OUT, f))
+    global PLAN
+    PLAN = json.load(open(os.path.join(SRC, 'plan.json'), encoding='utf-8'))
     posts = []
     for fn in sorted(os.listdir(SRC)):
         if not re.match(r'\d+-.*\.md$', fn): continue
@@ -225,7 +246,8 @@ def main():
         tags = ' '.join(f'<span>#{html.escape(t)}</span>' for t in meta['tags'])
         sched = '' if meta['published'] else f'<div class="sched">⏰ 예약 글 · {daystr(meta["date"])} 공개 예정</div>'
         PH = dict(photos=meta['photos'], extra=meta['extra'])
-        naverhtml = render(body, naver=True, **PH) + f'<p><br></p><p>👉 직접 돌려 보기: <a href="https://simulatiolab.com/{exp}">simulatiolab.com/{exp}</a></p><p style="text-align:right;color:#8b847a">— 시뮬라티오 랩, Lab장</p>'
+        nxt_meta = next_ or next((x for x in PLAN if x['no'] == meta['no'] + 1), None)
+        naverhtml = render(body, naver=True, **PH) + f'<p><br></p><p>👉 직접 돌려 보기: <a href="https://simulatiolab.com/{exp}">simulatiolab.com/{exp}</a></p><p style="text-align:right;color:#8b847a">— 시뮬라티오 랩, Lab장</p>' + teaser(meta, nxt_meta, naver=True)
         page = HEAD.format(title=html.escape(meta['title']) + ' | ' + BLOG, desc=html.escape(meta['excerpt']), image=SITE + meta['cover'], ogtype='article', blog=BLOG, base=base, ver=ver) + f'''
 <main class="post">{sched}
 <div class="cat">{html.escape(meta['category'])} · {meta['no']}편</div>
@@ -233,7 +255,7 @@ def main():
 <div class="meta"><span class="who"><span class="logo s">S</span>Lab장</span><span>{daystr(meta['date'])}</span></div>
 <article id="body">{render(body, base=base, **PH)}</article>
 <p class="sign">— 시뮬라티오 랩, Lab장</p>
-{cta}<div class="tags">{tags}</div>{nav}
+{cta}{teaser(meta, nxt_meta)}<div class="tags">{tags}</div>{nav}
 <section id="naver" class="naver" hidden>
 <h2>네이버 블로그로 옮기기</h2>
 <p>① 제목 → 제목 칸 ⌘V · ② 본문 → 본문 ⌘V (사진도 함께 붙어요. 안 붙으면 사진만 따로 올리기) · ③ 태그 → 발행 창 태그 칸 · ④ 카테고리 "{html.escape(meta['category'])}" · ⑤ 발행 뒤 네이버 주소를 content/{meta['no']:02d}-{meta['slug']}.md 의 naver_url에 적기</p>
