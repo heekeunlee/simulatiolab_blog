@@ -13,6 +13,8 @@ naver_url:
 ---
 정류장에서 이십 분을 기다렸다. 배차 간격은 분명 5분이라고 쓰여 있었다. 그러다 버스가 왔다. 두 대가 나란히. 뒤차는 텅 비어 있었다.
 
+{{photo a | 기다리던 버스가 두 대 나란히 들어오는 정류장 | Photorealistic photo of two city buses arriving one right behind the other at a city bus stop on a rainy evening, the first bus crowded, the second bus almost empty, wet reflective road, people waiting under the shelter seen from behind, no readable route numbers, no company logos, no readable text}}
+
 출퇴근을 해 본 사람이라면 한 번쯤 겪어 봤을 장면이다. 기사님이 게으른 걸까, 회사가 배차를 엉터리로 하는 걸까.
 
 !! 아무도 잘못하지 않아도, 버스는 뭉친다.
@@ -64,6 +66,8 @@ naver_url:
 효과가 있었던 건 거꾸로 들리는 방법이었다. 버스를 정류장에서 기다리게 하는 것. 앞차와의 간격이 충분히 벌어질 때까지 뒤차가 잠깐 서 있으면, 뭉침이 풀리고 평균 기다림이 다시 2분대로 돌아온다. 1964년 두 연구자(Newell과 Potts)가 이 되먹임을 처음 정리했고, 지금도 많은 도시가 "간격 맞추기 정차"를 쓴다.
 
 가끔 버스가 정류장에서 출발하지 않고 잠깐 서 있을 때가 있다. 답답하지만, 어쩌면 그 버스는 다음 정류장의 누군가를 위해 기다리는 중인지도 모른다.
+
+{{photo b | 출발하지 않고 잠깐 서 있는 버스, 다음 정류장의 누군가를 위해 | Photorealistic photo of a single city bus waiting at a quiet bus stop at dusk with its doors open and engine idling, warm interior light, a few passengers seated, calm mood, no readable route numbers, no logos, no readable text}}
 
 > 빨리 가는 것보다, 고르게 가는 것이 모두를 빨리 가게 한다.
 

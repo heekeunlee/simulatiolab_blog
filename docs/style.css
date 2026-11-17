@@ -67,3 +67,7 @@ th{background:#f7f4ee;font-size:12px;color:var(--mut);white-space:nowrap}td.n{fo
 .today td{background:#fffaf0}
 .howto{margin:20px 0;background:var(--page);border-radius:12px;padding:18px 20px;font-size:14px;line-height:1.8;color:#444}
 .howto h2{font-size:16px;margin:0 0 6px}
+.photos{border-color:#3a6fd8}.photos h2{color:#3a6fd8}.photos .nbtn button{background:#3a6fd8}
+.slots{font-size:14px;line-height:1.7;padding-left:20px}.slots li{margin-bottom:12px}.slots .pr{color:#777;font-size:12px;background:#f6f6f6;border-radius:6px;padding:6px 8px;margin-top:4px}
+.up{font:700 14px "Nanum Gothic",sans-serif;color:#3a6fd8;text-decoration:none;padding:10px 6px}
+figure.photo img{border:0;border-radius:6px}

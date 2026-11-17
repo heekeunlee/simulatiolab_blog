@@ -8,9 +8,8 @@
   const T = today();
 
   // 글 페이지: #naver 이면 옮기기 상자 보이기, 예약 글의 '다음 글' 링크 숨기기
-  const nv = document.getElementById('naver');
-  if (nv) {
-    if (location.hash === '#naver') { nv.hidden = false; setTimeout(() => nv.scrollIntoView({ behavior: 'smooth' }), 300); }
+  ['naver', 'photos'].forEach((id) => { const nv = document.getElementById(id); if (!nv) return;
+    if (location.hash === '#' + id) { nv.hidden = false; setTimeout(() => nv.scrollIntoView({ behavior: 'smooth' }), 300); }
     const msg = nv.querySelector('.msg');
     nv.querySelectorAll('[data-copy]').forEach((b) => b.addEventListener('click', async () => {
       const el = document.getElementById(b.dataset.copy); let ok = false;
@@ -23,7 +22,7 @@
       msg.textContent = ok ? b.textContent.replace(/^[①②③]\s*/, '') + ' 복사됨 ✓' : '복사가 막혔어요. 직접 선택해 ⌘C';
       setTimeout(() => (msg.textContent = ''), 2500);
     }));
-  }
+  });
   document.querySelectorAll('.pn a.nx').forEach((a) => { if (a.dataset.date > T && !location.hash) a.style.visibility = 'hidden'; });
 
   const L = document.getElementById('list'), D = document.getElementById('dash');
@@ -60,7 +59,7 @@
       else if (r.date > T) st = `<span class="st res">예약 · D-${dleft(r.date)}</span>`;
       else st = dleft(r.date) < -2 ? '<span class="st late">공개 · 네이버 늦음</span>' : '<span class="st pub">공개 · 네이버 대기</span>';
       const acts = r.kind === 'post'
-        ? `<a href="p/${r.slug}/">보기</a><a href="p/${r.slug}/#naver">네이버 옮기기</a>${r.naver_url ? `<a href="${esc(r.naver_url)}" target="_blank" rel="noopener">네이버 글</a>` : ''}`
+        ? `<a href="p/${r.slug}/">보기</a><a href="p/${r.slug}/#photos">사진 ${r.photos_filled}/${r.photos_total}</a><a href="p/${r.slug}/#naver">네이버 옮기기</a>${r.naver_url ? `<a href="${esc(r.naver_url)}" target="_blank" rel="noopener">네이버 글</a>` : ''}`
         : `<span style="color:#999">${esc(r.note || '')}</span>`;
       return `<tr class="${r.date === T ? 'today' : ''}"><td class="n">${r.no}편</td><td class="dt">${day(r.date)}</td><td>${esc(r.title)}${r.kind === 'post' ? `<div style="color:#999;font-size:12px">${r.chars.toLocaleString()}자 · ${esc(r.category)}</div>` : ''}</td><td>${st}</td>
         <td><a href="https://simulatiolab.com/${r.experiment}" target="_blank" rel="noopener">${esc(r.experiment)}</a>${r.video ? ` · <a href="${esc(r.video)}" target="_blank" rel="noopener">영상</a>` : ''}</td><td class="acts">${acts}</td></tr>`;

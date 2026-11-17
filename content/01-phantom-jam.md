@@ -13,6 +13,8 @@ naver_url:
 ---
 고속도로 위에서 이십 분을 기다시피 갔다. 사고가 났겠거니 했다. 공사 중이겠거니 했다. 그러다 어느 순간 길이 거짓말처럼 열렸고, 나는 속도를 올리며 창밖을 살폈다. 부서진 차도, 주황색 고깔도, 길에 떨어진 짐도 없었다.
 
+{{photo a | 해 질 녘 고속도로 정체, 운전석에서 본 끝없는 브레이크등 | Photorealistic photo taken from the driver's seat of a car stuck in a long expressway traffic jam at dusk in Korea, rows of red brake lights stretching to the horizon, no accident, no roadwork, nothing blocking the road, light rain on the windshield, 35mm lens, natural light, documentary style, no readable license plates, no logos, no text}}
+
 !! 앞에는 아무것도 없었다.
 
 그 이십 분은 어디에서 온 걸까. 누가 내 시간을 가져갔을까. 대답 없는 질문이 생각보다 오래 남았다.
@@ -43,6 +45,8 @@ naver_url:
 
 출근길 지하철 계단 맨 위에서 누군가 휴대폰을 보느라 반걸음 멈춘다. 그는 곧 다시 걷는다. 하지만 계단 아래에는 그 반걸음이 수십 사람의 멈춤이 되어 고여 있다. 정작 그는 그 줄을 보지 못한다. 이미 앞서 걷고 있으니까.
 
+{{photo b | 출근길 지하철 계단, 맨 위의 반걸음이 아래에서 멈춤이 된다 | Photorealistic photo of a crowded subway station staircase at morning rush hour in Seoul, commuters bunched up at the bottom of the stairs while one person at the top has paused to look at a phone, slight motion blur on the crowd, faces not identifiable, no logos, no readable signs, natural light}}
+
 친구의 메시지에 "나중에 제대로 답해야지" 하며 하루를 미룬다. 친구는 늦어지는 답장 앞에서 다음 말을 조금 망설인다. 나는 그 망설임을 느끼고 조금 더 미룬다. 멀어지자고 한 사람은 아무도 없었는데, 둘 사이에 정체가 생긴다.
 
 ---
@@ -64,6 +68,8 @@ naver_url:
 실험에서 가장 오래 남은 장면은 따로 있다. 길이 한산할 때는 똑같이 망설여도 막힘이 생기지 않았다. 차와 차 사이의 빈 곳이 그 흔들림을 받아 주었기 때문이다. 길이 빽빽해질수록, 같은 망설임이 더 큰 멈춤이 되었다.
 
 ![차가 많아질수록 같은 망설임이 더 큰 손해가 된다](img/01/5-density.jpg)
+
+{{photo c | 새벽의 한산한 도로, 차와 차 사이의 넉넉한 빈 곳 | Photorealistic high-angle photo of a calm multi-lane road at dawn with only a few cars spaced far apart, soft morning fog, pale blue and warm light, peaceful mood, no logos, no readable signs, no people visible}}
 
 노자는 바퀴를 두고 이렇게 말했다. 서른 개의 바큇살이 하나의 바퀴통에 모이지만, 수레가 굴러가는 것은 바퀴통 가운데가 비어 있기 때문이라고. 그릇이 쓸모 있는 것도, 방이 쓸모 있는 것도 그 안의 빈 곳 덕분이라고.
 

@@ -13,6 +13,8 @@ naver_url:
 ---
 1943년, 당신이 공군 책임자라고 해 보자. 전쟁터에서 돌아온 폭격기들이 활주로에 줄지어 서 있다. 날개와 몸통에는 총알 구멍이 수백 개다. 엔진 쪽은 이상할 만큼 깨끗하다.
 
+{{photo a | 전쟁에서 돌아온 폭격기 날개의 총알 구멍(재현 이미지) | Photorealistic close-up photo in the style of a 1940s documentary of a battle-damaged four-engine bomber wing on a grass airfield, the aluminum skin riddled with bullet holes, mechanics in the blurred background, overcast sky, film grain, no national insignia, no unit markings, no text}}
+
 철판은 무거워서 비행기 전체를 두를 수는 없다. 딱 두 곳만 덧댈 수 있다면, 어디를 막아야 할까.
 
 !! 구멍이 가장 많은 날개와 몸통?
@@ -51,6 +53,8 @@ naver_url:
 
 휴대폰 수리 센터에 가 보면, 깨진 화면을 들고 온 사람이 대부분이다. 그럼 화면이 휴대폰에서 가장 약한 부분일까? 아니다. 기판이 망가진 휴대폰은 수리 센터가 아니라 서랍이나 쓰레기통으로 간다. 수리 센터는 "고칠 수 있게 망가진 것"만 모이는 곳이다.
 
+{{photo b | 화면 깨진 휴대폰이 줄지어 놓인 수리 센터 카운터 | Photorealistic photo of a small phone repair shop counter with a row of smartphones that all have cracked screens, repair tools and tiny screwdrivers nearby, shallow depth of field, warm indoor light, no brand logos, no readable text}}
+
 ![수리 센터에 모이는 건 고칠 만한 고장뿐이다](img/02/phone.jpg)
 
 1차 대전에 철모를 처음 썼을 때, 머리를 다쳐 병원에 오는 병사가 오히려 늘었다는 이야기도 있다. 철모가 쓸모없었던 걸까? 철모 덕분에 예전 같으면 현장에서 목숨을 잃었을 병사들이 다친 채로 병원에 올 수 있게 된 것이다.
@@ -66,6 +70,8 @@ naver_url:
 성공한 사람의 이야기도 활주로에 돌아온 비행기와 닮았다.
 
 "꾸준히만 하면 된다." "교과서 위주로 공부했다." "30년째 이 자리에서 장사했다." 모두 진심이고, 거짓말도 아니다. 다만 같은 방법으로 꾸준히 했지만 조용히 사라진 사람들은 인터뷰를 하지 않는다. 문을 닫은 가게는 골목에 간판을 남기지 않는다.
+
+{{photo c | 붐비는 오래된 맛집 골목 사이, 셔터가 내려간 빈 가게 하나 | Photorealistic evening photo of a narrow old restaurant alley in Seoul, warm lights and customers at busy restaurants, and one shop in between with its metal shutter closed and an empty storefront, signs blurred or unreadable, faces not identifiable, no logos}}
 
 그래서 성공담을 들을 때 나는 세 가지를 묻기로 했다.
 
