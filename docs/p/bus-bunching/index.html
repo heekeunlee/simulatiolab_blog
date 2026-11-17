@@ -1,90 +1,104 @@
 <!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>버스는 왜 꼭 두 대씩 같이 올까? — 2초 늦은 버스 한 대의 6시간 | 시뮬라티오 랩 블로그</title><meta name="description" content="정류장에서 이십 분을 기다렸다. 배차 간격은 분명 5분이라고 쓰여 있었다. 그러다 버스가 왔다. 두 대가 나란히. 뒤차는 텅 비어 있었다. 출퇴근을 해 본 사람이라면 한 번쯤 겪어 봤을 장면이다. 기사님이 게으른 걸까, 회사가 배차를 엉터리로 하는 걸까. 아무도 잘못하">
-<meta property="og:title" content="버스는 왜 꼭 두 대씩 같이 올까? — 2초 늦은 버스 한 대의 6시간 | 시뮬라티오 랩 블로그"><meta property="og:description" content="정류장에서 이십 분을 기다렸다. 배차 간격은 분명 5분이라고 쓰여 있었다. 그러다 버스가 왔다. 두 대가 나란히. 뒤차는 텅 비어 있었다. 출퇴근을 해 본 사람이라면 한 번쯤 겪어 봤을 장면이다. 기사님이 게으른 걸까, 회사가 배차를 엉터리로 하는 걸까. 아무도 잘못하"><meta property="og:image" content="https://heekeunlee.github.io/simulatiolab_blog/img/03/convoy.jpg"><meta property="og:type" content="article">
+<title>버스는 왜 꼭 두 대씩 같이 올까? — 2초 늦은 버스 한 대의 6시간 | 시뮬라티오 랩 블로그</title><meta name="description" content="버스가 정류장에 섰다. 탈 사람은 다 탔다. 문도 닫혔다. 그런데 출발하지 않는다. 십 초. 이십 초. 나는 속으로 기사님을 재촉했다. 아니, 왜 안 가요. 그날 저녁 나는 그 버스를 다시 생각하게 됐다. 정확히는, 그 버스가 왜 기다렸는지 알게 됐다. -- 버스는 왜">
+<meta property="og:title" content="버스는 왜 꼭 두 대씩 같이 올까? — 2초 늦은 버스 한 대의 6시간 | 시뮬라티오 랩 블로그"><meta property="og:description" content="버스가 정류장에 섰다. 탈 사람은 다 탔다. 문도 닫혔다. 그런데 출발하지 않는다. 십 초. 이십 초. 나는 속으로 기사님을 재촉했다. 아니, 왜 안 가요. 그날 저녁 나는 그 버스를 다시 생각하게 됐다. 정확히는, 그 버스가 왜 기다렸는지 알게 됐다. -- 버스는 왜"><meta property="og:image" content="https://heekeunlee.github.io/simulatiolab_blog/img/03/convoy.jpg"><meta property="og:type" content="article">
 <link rel="alternate" type="application/rss+xml" title="시뮬라티오 랩 블로그" href="../../rss.xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../style.css?v=202611180747"></head><body>
+<link rel="stylesheet" href="../../style.css?v=202611180816"></head><body>
 <header class="top"><a class="brand" href="../../"><span class="logo">S</span>시뮬라티오 랩 블로그</a><nav><a href="../../">글 목록</a><a href="https://simulatiolab.com" target="_blank" rel="noopener">실험실</a><a href="https://www.youtube.com/@simulatiolab" target="_blank" rel="noopener">유튜브</a><a href="../../dashboard.html">대시보드</a></nav></header>
 
 <main class="post"><div class="sched">⏰ 예약 글 · 2026. 11. 21. (토) 공개 예정</div>
 <div class="cat">왜 그럴까 · 3편</div>
 <h1>버스는 왜 꼭 두 대씩 같이 올까? — 2초 늦은 버스 한 대의 6시간</h1><p class="sub">아무도 잘못하지 않았는데 버스가 뭉치는 이유</p>
 <div class="meta"><span class="who"><span class="logo s">S</span>Lab장</span><span>2026. 11. 21. (토)</span></div>
-<article id="body"><p>정류장에서 이십 분을 기다렸다. 배차 간격은 분명 5분이라고 쓰여 있었다. 그러다 버스가 왔다. 두 대가 나란히. 뒤차는 텅 비어 있었다.</p>
-<p>출퇴근을 해 본 사람이라면 한 번쯤 겪어 봤을 장면이다. 기사님이 게으른 걸까, 회사가 배차를 엉터리로 하는 걸까.</p>
+<article id="body"><p>버스가 정류장에 섰다. 탈 사람은 다 탔다. 문도 닫혔다. 그런데 출발하지 않는다.</p>
+<p>십 초. 이십 초. 나는 속으로 기사님을 재촉했다. 아니, 왜 안 가요.</p>
+<p>그날 저녁 나는 그 버스를 다시 생각하게 됐다. 정확히는, 그 버스가 왜 기다렸는지 알게 됐다.</p>
+<p class="orn">· · ·</p>
+<h3>버스는 왜 두 대씩 올까</h3>
+<p>먼저 반대 장면부터. 배차 간격 5분이라던 버스를 한참 기다렸는데, 두 대가 나란히 온다. 앞차는 꽉 찼고, 뒤차는 텅 비었다.</p>
+<p>기사님이 게으른 걸까. 배차를 엉터리로 짠 걸까. 궁금한 건 못 참는 성격이라, 컴퓨터 속에 버스 노선을 하나 만들었다.</p>
 <p class="pull">아무도 잘못하지 않아도, 버스는 뭉친다.</p>
 <p class="orn">· · ·</p>
 <h3>2초의 시작</h3>
-<p>컴퓨터 속에 순환 노선을 하나 만들었다. 정류장 24곳, 버스 6대. 버스는 약 4분 40초 간격으로 고르게 출발한다. 승객은 정류장마다 꾸준히 와서 줄을 서고, 버스는 줄이 빌 때까지 사람을 태운다.</p>
-<p>그런데 출발할 때 버스 한 대가 앞차보다 아주 조금 늦었다. 2초쯤.</p>
+<p>정류장 24곳을 도는 순환 노선. 버스 6대가 약 4분 40초 간격으로 고르게 출발한다. 승객은 정류장마다 꾸준히 와서 줄을 서고, 버스는 줄이 빌 때까지 태운다.</p>
+<p>딱 하나만 어긋나게 했다. 버스 한 대가 앞차보다 2초쯤 늦게 출발한다.</p>
 <figure><img src="../../img/03/hook.jpg" alt="처음엔 2초 늦었을 뿐인 버스" loading="lazy"><figcaption>처음엔 2초 늦었을 뿐인 버스</figcaption></figure>
-<p>2초는 아무것도 아니다. 그런데 그 버스가 다음 정류장에 도착하면, 앞차가 떠난 지 2초 더 지난 셈이다. 그사이 사람이 조금 더 와 있다. 사람이 많으니 태우는 데 시간이 조금 더 걸린다. 그래서 다음 정류장에는 조금 더 늦게 도착한다. 거기에는 사람이 조금 더 많다.</p>
+<p>2초. 신호 한 번 놓친 것보다 짧다.</p>
+<p>그런데 그 버스가 다음 정류장에 도착하면, 앞차가 떠난 지 2초 더 지난 셈이다. 그사이 사람이 조금 더 와 있다. 사람이 많으니 태우는 데 조금 더 걸린다. 그래서 다음 정류장에는 조금 더 늦게 닿는다. 거기엔 사람이 조금 더 많다.</p>
 <figure><img src="../../img/03/stop.jpg" alt="늦은 버스의 정류장에는 사람이 더 쌓인다" loading="lazy"><figcaption>늦은 버스의 정류장에는 사람이 더 쌓인다</figcaption></figure>
-<p>늦을수록 더 늦어지는 고리. 이걸 되먹임이라고 부른다.</p>
+<p><b>늦을수록 더 늦어지는 고리.</b> 한번 들어가면 혼자서는 빠져나오지 못한다.</p>
 <p class="orn">· · ·</p>
-<h3>뒤차는 반대로 빨라진다</h3>
-<p>뒤따라오는 버스는 정반대다. 앞차가 사람을 많이 태워 갔으니, 정류장에 남은 사람이 적다. 금방 태우고 금방 떠난다. 그러니 점점 빨라진다.</p>
-<p>앞차는 점점 느려지고, 뒤차는 점점 빨라진다. 둘 사이의 간격은 줄어들 수밖에 없다.</p>
+<h3>뒤차는 거꾸로 빨라진다</h3>
+<p>뒤따라오는 버스는 정반대다. 앞차가 사람을 많이 태워 갔으니 정류장이 한산하다. 금방 태우고 금방 떠난다. 점점 빨라진다.</p>
+<p>앞차는 점점 느려지고, 뒤차는 점점 빨라진다. 간격은 줄어들 수밖에 없다.</p>
 <figure><img src="../../img/03/gap.jpg" alt="두 버스 사이의 간격이 1분 54초에서 6초로 줄어든다" loading="lazy"><figcaption>두 버스 사이의 간격이 1분 54초에서 6초로 줄어든다</figcaption></figure>
-<p>시뮬레이션에서 이 두 버스는 출발 후 약 두 시간 만에 딱 붙어 버렸다. 그리고 같은 일이 다른 버스들 사이에서도 일어났다.</p>
-<h3>6시간 뒤</h3>
-<p>여섯 시간이 지나자, 고르게 흩어져 있던 버스 6대가 노선 위에서 한 덩어리가 되어 함께 달리고 있었다. 정류장에서는 버스 6대가 줄줄이 지나간 뒤 한참 동안 아무것도 오지 않는다.</p>
+<p>화면 속 두 버스는 출발 후 두 시간쯤 지나 딱 붙어 버렸다. 같은 일이 다른 버스들 사이에서도 일어났다.</p>
+<p>여섯 시간 뒤. <b>고르게 흩어져 있던 버스 6대가 한 덩어리가 되어 함께 달리고 있었다.</b> 정류장에는 버스 여섯 대가 줄줄이 지나간 뒤, 한참 동안 아무것도 오지 않았다.</p>
 <figure><img src="../../img/03/convoy.jpg" alt="6시간 뒤, 버스 6대가 한 덩어리로" loading="lazy"><figcaption>6시간 뒤, 버스 6대가 한 덩어리로</figcaption></figure>
-<p>정류장에서 기다리는 시간은 평균 2.3분에서 9.1분으로 늘었다. 버스 수도, 승객 수도, 도로도 그대로인데.</p>
-<p class="link">버스 간격을 바꾸거나 "버스를 일부러 기다리게" 하면 어떻게 될까. 직접 돌려 보자.<br>→ <a href="https://simulatiolab.com/bunching" target="_blank" rel="noopener">버스 몰림 실험, 직접 돌려 보기</a></p>
+<p>정류장에서 기다리는 시간은 평균 2.3분에서 9.1분이 됐다. 버스 수도, 승객 수도, 도로도 그대로인데.</p>
+<p class="link">버스를 늘리거나, 일부러 기다리게 하면 어떻게 될까. 직접 돌려 보자.<br>→ <a href="https://simulatiolab.com/bunching" target="_blank" rel="noopener">버스 몰림 실험, 직접 돌려 보기</a></p>
 <p class="orn">· · ·</p>
 <h3>거꾸로 같은 해법</h3>
-<p>그럼 어떻게 해야 할까. 버스를 6대에서 8대로 늘리면? 평균 기다림은 5.3분으로 줄지만, 8대가 고르게 다닐 때(1.7분)의 세 배다. 버스는 여전히 뭉친다. 더 빨리 달리게 하면? 7.6분. 역시 뭉친다.</p>
-<p>효과가 있었던 건 거꾸로 들리는 방법이었다. 버스를 정류장에서 기다리게 하는 것. 앞차와의 간격이 충분히 벌어질 때까지 뒤차가 잠깐 서 있으면, 뭉침이 풀리고 평균 기다림이 다시 2분대로 돌아온다. 1964년 두 연구자(Newell과 Potts)가 이 되먹임을 처음 정리했고, 지금도 많은 도시가 "간격 맞추기 정차"를 쓴다.</p>
-<p>가끔 버스가 정류장에서 출발하지 않고 잠깐 서 있을 때가 있다. 답답하지만, 어쩌면 그 버스는 다음 정류장의 누군가를 위해 기다리는 중인지도 모른다.</p>
-<blockquote>빨리 가는 것보다, 고르게 가는 것이 모두를 빨리 가게 한다.</blockquote>
+<p>버스를 6대에서 8대로 늘려 봤다. 평균 기다림은 5.3분으로 줄었다. 하지만 8대가 고르게 다닐 때(1.7분)의 세 배다. 버스는 여전히 뭉쳤다. 더 빨리 달리게 해도 7.6분. 역시 뭉쳤다.</p>
+<p>효과가 있었던 건 거꾸로 들리는 방법이었다. <b>버스를 정류장에서 기다리게 하는 것.</b> 앞차와의 간격이 충분히 벌어질 때까지 뒤차가 잠깐 서 있으면, 뭉침이 풀리고 평균 기다림이 다시 2분대로 돌아왔다.</p>
+<p>1964년, 두 연구자(Newell과 Potts)가 이 고리를 처음 정리했다. 지금도 많은 도시가 간격을 맞추려고 버스를 정류장에 잠깐 세운다.</p>
+<p>그러니까 그날 출발하지 않던 버스는, 게으른 게 아니었을지도 모른다. 다음 정류장에서 기다리는 누군가를 위해, 앞차와의 거리를 재고 있었을지도.</p>
+<p>이제 나는 서 있는 버스 안에서 재촉하지 않는다. 대신 창밖을 본다. 저 앞 어딘가에서, 내 버스가 지켜 준 간격만큼 누군가의 기다림이 줄어들고 있을 테니까.</p>
+<p>여러분 동네 버스는 어떤가요? 두 대씩 오는 노선이 있다면 댓글로 알려 주세요.</p>
 <p class="note">덧붙임. 글 속의 숫자는 사이트 시뮬레이션 모델 결과다(정류장 24곳, 버스 6대, 승객 시간당 40명, 시드 1. 평균 기다림은 8번 반복 평균). 실제 노선의 기록이 아니다. 근거: G. F. Newell &amp; R. B. Potts (1964), "Maintaining a bus schedule". 그림은 직접 만든 3D 시뮬레이션 화면이며, 글 정리에 AI(Claude)의 도움을 받았다.</p></article>
 <p class="sign">— 시뮬라티오 랩, Lab장</p>
-<div class="cta"><a class="btn" href="https://simulatiolab.com/bunching" target="_blank" rel="noopener">🧪 이 실험 직접 돌려 보기</a><a class="btn ghost" href="https://youtube.com/shorts/CkFnlk4zI80" target="_blank" rel="noopener">▶ 영상으로 보기</a></div><div class="tags"><span>#버스두대같이오는이유</span> <span>#버스몰림</span> <span>#배차간격</span> <span>#대중교통</span> <span>#출퇴근</span> <span>#되먹임</span> <span>#시뮬레이션</span> <span>#시뮬라티오랩</span></div><nav class="pn"><a href="../survivor/">← 성공한 사람 말만 들으면 속는 이유 — 돌아온 폭격기의 총알 구멍(생존자 편향)</a><span></span></nav>
+<div class="cta"><a class="btn" href="https://simulatiolab.com/bunching" target="_blank" rel="noopener">🧪 이 실험 직접 돌려 보기</a><a class="btn ghost" href="https://youtube.com/shorts/CkFnlk4zI80" target="_blank" rel="noopener">▶ 영상으로 보기</a></div><div class="tags"><span>#버스두대같이오는이유</span> <span>#버스몰림</span> <span>#배차간격</span> <span>#대중교통</span> <span>#출퇴근</span> <span>#시뮬레이션</span> <span>#시뮬라티오랩</span></div><nav class="pn"><a href="../survivor/">← 성공한 사람 말만 들으면 속는 이유 — 돌아온 폭격기의 총알 구멍(생존자 편향)</a><span></span></nav>
 <section id="naver" class="naver" hidden>
 <h2>네이버 블로그로 옮기기</h2>
 <p>① 제목 → 제목 칸 ⌘V · ② 본문 → 본문 ⌘V (사진도 함께 붙어요. 안 붙으면 사진만 따로 올리기) · ③ 태그 → 발행 창 태그 칸 · ④ 카테고리 "왜 그럴까" · ⑤ 발행 뒤 네이버 주소를 content/03-bus-bunching.md 의 naver_url에 적기</p>
 <div class="nbtn"><button data-copy="nt">① 제목 복사</button><button data-copy="nb">② 본문 복사</button><button data-copy="ng">③ 태그 복사</button><span class="msg"></span></div>
-<div id="nt" class="cp">버스는 왜 꼭 두 대씩 같이 올까? — 2초 늦은 버스 한 대의 6시간</div><div id="nb" class="cp"><p>정류장에서 이십 분을 기다렸다. 배차 간격은 분명 5분이라고 쓰여 있었다. 그러다 버스가 왔다. 두 대가 나란히. 뒤차는 텅 비어 있었다.</p>
-<p>출퇴근을 해 본 사람이라면 한 번쯤 겪어 봤을 장면이다. 기사님이 게으른 걸까, 회사가 배차를 엉터리로 하는 걸까.</p>
+<div id="nt" class="cp">버스는 왜 꼭 두 대씩 같이 올까? — 2초 늦은 버스 한 대의 6시간</div><div id="nb" class="cp"><p>버스가 정류장에 섰다. 탈 사람은 다 탔다. 문도 닫혔다. 그런데 출발하지 않는다.</p>
+<p>십 초. 이십 초. 나는 속으로 기사님을 재촉했다. 아니, 왜 안 가요.</p>
+<p>그날 저녁 나는 그 버스를 다시 생각하게 됐다. 정확히는, 그 버스가 왜 기다렸는지 알게 됐다.</p>
+<p style="text-align:center;color:#8b847a">· · ·</p>
+<p><b><span style="font-size:19px;color:#7a5c3e">버스는 왜 두 대씩 올까</span></b></p>
+<p>먼저 반대 장면부터. 배차 간격 5분이라던 버스를 한참 기다렸는데, 두 대가 나란히 온다. 앞차는 꽉 찼고, 뒤차는 텅 비었다.</p>
+<p>기사님이 게으른 걸까. 배차를 엉터리로 짠 걸까. 궁금한 건 못 참는 성격이라, 컴퓨터 속에 버스 노선을 하나 만들었다.</p>
 <p><b><span style="font-size:19px">아무도 잘못하지 않아도, 버스는 뭉친다.</span></b></p>
 <p style="text-align:center;color:#8b847a">· · ·</p>
 <p><b><span style="font-size:19px;color:#7a5c3e">2초의 시작</span></b></p>
-<p>컴퓨터 속에 순환 노선을 하나 만들었다. 정류장 24곳, 버스 6대. 버스는 약 4분 40초 간격으로 고르게 출발한다. 승객은 정류장마다 꾸준히 와서 줄을 서고, 버스는 줄이 빌 때까지 사람을 태운다.</p>
-<p>그런데 출발할 때 버스 한 대가 앞차보다 아주 조금 늦었다. 2초쯤.</p>
+<p>정류장 24곳을 도는 순환 노선. 버스 6대가 약 4분 40초 간격으로 고르게 출발한다. 승객은 정류장마다 꾸준히 와서 줄을 서고, 버스는 줄이 빌 때까지 태운다.</p>
+<p>딱 하나만 어긋나게 했다. 버스 한 대가 앞차보다 2초쯤 늦게 출발한다.</p>
 <p style="text-align:center"><img src="https://heekeunlee.github.io/simulatiolab_blog/img/03/hook.jpg" alt="처음엔 2초 늦었을 뿐인 버스"><br><span style="font-size:13px;color:#888">처음엔 2초 늦었을 뿐인 버스</span></p>
-<p>2초는 아무것도 아니다. 그런데 그 버스가 다음 정류장에 도착하면, 앞차가 떠난 지 2초 더 지난 셈이다. 그사이 사람이 조금 더 와 있다. 사람이 많으니 태우는 데 시간이 조금 더 걸린다. 그래서 다음 정류장에는 조금 더 늦게 도착한다. 거기에는 사람이 조금 더 많다.</p>
+<p>2초. 신호 한 번 놓친 것보다 짧다.</p>
+<p>그런데 그 버스가 다음 정류장에 도착하면, 앞차가 떠난 지 2초 더 지난 셈이다. 그사이 사람이 조금 더 와 있다. 사람이 많으니 태우는 데 조금 더 걸린다. 그래서 다음 정류장에는 조금 더 늦게 닿는다. 거기엔 사람이 조금 더 많다.</p>
 <p style="text-align:center"><img src="https://heekeunlee.github.io/simulatiolab_blog/img/03/stop.jpg" alt="늦은 버스의 정류장에는 사람이 더 쌓인다"><br><span style="font-size:13px;color:#888">늦은 버스의 정류장에는 사람이 더 쌓인다</span></p>
-<p>늦을수록 더 늦어지는 고리. 이걸 되먹임이라고 부른다.</p>
+<p><b>늦을수록 더 늦어지는 고리.</b> 한번 들어가면 혼자서는 빠져나오지 못한다.</p>
 <p style="text-align:center;color:#8b847a">· · ·</p>
-<p><b><span style="font-size:19px;color:#7a5c3e">뒤차는 반대로 빨라진다</span></b></p>
-<p>뒤따라오는 버스는 정반대다. 앞차가 사람을 많이 태워 갔으니, 정류장에 남은 사람이 적다. 금방 태우고 금방 떠난다. 그러니 점점 빨라진다.</p>
-<p>앞차는 점점 느려지고, 뒤차는 점점 빨라진다. 둘 사이의 간격은 줄어들 수밖에 없다.</p>
+<p><b><span style="font-size:19px;color:#7a5c3e">뒤차는 거꾸로 빨라진다</span></b></p>
+<p>뒤따라오는 버스는 정반대다. 앞차가 사람을 많이 태워 갔으니 정류장이 한산하다. 금방 태우고 금방 떠난다. 점점 빨라진다.</p>
+<p>앞차는 점점 느려지고, 뒤차는 점점 빨라진다. 간격은 줄어들 수밖에 없다.</p>
 <p style="text-align:center"><img src="https://heekeunlee.github.io/simulatiolab_blog/img/03/gap.jpg" alt="두 버스 사이의 간격이 1분 54초에서 6초로 줄어든다"><br><span style="font-size:13px;color:#888">두 버스 사이의 간격이 1분 54초에서 6초로 줄어든다</span></p>
-<p>시뮬레이션에서 이 두 버스는 출발 후 약 두 시간 만에 딱 붙어 버렸다. 그리고 같은 일이 다른 버스들 사이에서도 일어났다.</p>
-<p><b><span style="font-size:19px;color:#7a5c3e">6시간 뒤</span></b></p>
-<p>여섯 시간이 지나자, 고르게 흩어져 있던 버스 6대가 노선 위에서 한 덩어리가 되어 함께 달리고 있었다. 정류장에서는 버스 6대가 줄줄이 지나간 뒤 한참 동안 아무것도 오지 않는다.</p>
+<p>화면 속 두 버스는 출발 후 두 시간쯤 지나 딱 붙어 버렸다. 같은 일이 다른 버스들 사이에서도 일어났다.</p>
+<p>여섯 시간 뒤. <b>고르게 흩어져 있던 버스 6대가 한 덩어리가 되어 함께 달리고 있었다.</b> 정류장에는 버스 여섯 대가 줄줄이 지나간 뒤, 한참 동안 아무것도 오지 않았다.</p>
 <p style="text-align:center"><img src="https://heekeunlee.github.io/simulatiolab_blog/img/03/convoy.jpg" alt="6시간 뒤, 버스 6대가 한 덩어리로"><br><span style="font-size:13px;color:#888">6시간 뒤, 버스 6대가 한 덩어리로</span></p>
-<p>정류장에서 기다리는 시간은 평균 2.3분에서 9.1분으로 늘었다. 버스 수도, 승객 수도, 도로도 그대로인데.</p>
-<p>버스 간격을 바꾸거나 "버스를 일부러 기다리게" 하면 어떻게 될까. 직접 돌려 보자.<br>→ <a href="https://simulatiolab.com/bunching">버스 몰림 실험, 직접 돌려 보기</a></p>
+<p>정류장에서 기다리는 시간은 평균 2.3분에서 9.1분이 됐다. 버스 수도, 승객 수도, 도로도 그대로인데.</p>
+<p>버스를 늘리거나, 일부러 기다리게 하면 어떻게 될까. 직접 돌려 보자.<br>→ <a href="https://simulatiolab.com/bunching">버스 몰림 실험, 직접 돌려 보기</a></p>
 <p style="text-align:center;color:#8b847a">· · ·</p>
 <p><b><span style="font-size:19px;color:#7a5c3e">거꾸로 같은 해법</span></b></p>
-<p>그럼 어떻게 해야 할까. 버스를 6대에서 8대로 늘리면? 평균 기다림은 5.3분으로 줄지만, 8대가 고르게 다닐 때(1.7분)의 세 배다. 버스는 여전히 뭉친다. 더 빨리 달리게 하면? 7.6분. 역시 뭉친다.</p>
-<p>효과가 있었던 건 거꾸로 들리는 방법이었다. 버스를 정류장에서 기다리게 하는 것. 앞차와의 간격이 충분히 벌어질 때까지 뒤차가 잠깐 서 있으면, 뭉침이 풀리고 평균 기다림이 다시 2분대로 돌아온다. 1964년 두 연구자(Newell과 Potts)가 이 되먹임을 처음 정리했고, 지금도 많은 도시가 "간격 맞추기 정차"를 쓴다.</p>
-<p>가끔 버스가 정류장에서 출발하지 않고 잠깐 서 있을 때가 있다. 답답하지만, 어쩌면 그 버스는 다음 정류장의 누군가를 위해 기다리는 중인지도 모른다.</p>
-<p style="text-align:center"><b><span style="font-size:19px">"빨리 가는 것보다, 고르게 가는 것이 모두를 빨리 가게 한다."</span></b></p>
-<p><span style="font-size:13px;color:#888">덧붙임. 글 속의 숫자는 사이트 시뮬레이션 모델 결과다(정류장 24곳, 버스 6대, 승객 시간당 40명, 시드 1. 평균 기다림은 8번 반복 평균). 실제 노선의 기록이 아니다. 근거: G. F. Newell &amp; R. B. Potts (1964), "Maintaining a bus schedule". 그림은 직접 만든 3D 시뮬레이션 화면이며, 글 정리에 AI(Claude)의 도움을 받았다.</span></p><p><br></p><p>👉 직접 돌려 보기: <a href="https://simulatiolab.com/bunching">simulatiolab.com/bunching</a></p><p style="text-align:right;color:#8b847a">— 시뮬라티오 랩, Lab장</p></div><textarea id="ng" class="cp">버스두대같이오는이유, 버스몰림, 배차간격, 대중교통, 출퇴근, 되먹임, 시뮬레이션, 시뮬라티오랩</textarea>
+<p>버스를 6대에서 8대로 늘려 봤다. 평균 기다림은 5.3분으로 줄었다. 하지만 8대가 고르게 다닐 때(1.7분)의 세 배다. 버스는 여전히 뭉쳤다. 더 빨리 달리게 해도 7.6분. 역시 뭉쳤다.</p>
+<p>효과가 있었던 건 거꾸로 들리는 방법이었다. <b>버스를 정류장에서 기다리게 하는 것.</b> 앞차와의 간격이 충분히 벌어질 때까지 뒤차가 잠깐 서 있으면, 뭉침이 풀리고 평균 기다림이 다시 2분대로 돌아왔다.</p>
+<p>1964년, 두 연구자(Newell과 Potts)가 이 고리를 처음 정리했다. 지금도 많은 도시가 간격을 맞추려고 버스를 정류장에 잠깐 세운다.</p>
+<p>그러니까 그날 출발하지 않던 버스는, 게으른 게 아니었을지도 모른다. 다음 정류장에서 기다리는 누군가를 위해, 앞차와의 거리를 재고 있었을지도.</p>
+<p>이제 나는 서 있는 버스 안에서 재촉하지 않는다. 대신 창밖을 본다. 저 앞 어딘가에서, 내 버스가 지켜 준 간격만큼 누군가의 기다림이 줄어들고 있을 테니까.</p>
+<p>여러분 동네 버스는 어떤가요? 두 대씩 오는 노선이 있다면 댓글로 알려 주세요.</p>
+<p><span style="font-size:13px;color:#888">덧붙임. 글 속의 숫자는 사이트 시뮬레이션 모델 결과다(정류장 24곳, 버스 6대, 승객 시간당 40명, 시드 1. 평균 기다림은 8번 반복 평균). 실제 노선의 기록이 아니다. 근거: G. F. Newell &amp; R. B. Potts (1964), "Maintaining a bus schedule". 그림은 직접 만든 3D 시뮬레이션 화면이며, 글 정리에 AI(Claude)의 도움을 받았다.</span></p><p><br></p><p>👉 직접 돌려 보기: <a href="https://simulatiolab.com/bunching">simulatiolab.com/bunching</a></p><p style="text-align:right;color:#8b847a">— 시뮬라티오 랩, Lab장</p></div><textarea id="ng" class="cp">버스두대같이오는이유, 버스몰림, 배차간격, 대중교통, 출퇴근, 시뮬레이션, 시뮬라티오랩</textarea>
 </section><section id="photos" class="naver photos" hidden>
 <h2>📸 실사 사진 만들기 (0/2)</h2>
 <p>① 아래 "ChatGPT 부탁 복사"를 눌러 ChatGPT에 붙여 넣기 → ② 만든 사진을 내려받기 → ③ "사진 올리러 가기"에서 끌어다 놓고 <b>Commit changes</b> → 1~2분 뒤 글에 자동으로 들어가요. 파일 이름을 a.png, b.png로 바꾸면 그 자리로, 그냥 두면 만든 순서대로 빈자리를 채워요.</p>
 <div class="nbtn"><button data-copy="pq">ChatGPT 부탁 복사</button><a class="up" href="https://github.com/heekeunlee/simulatiolab_blog/upload/main/content/photos/03" target="_blank" rel="noopener">사진 올리러 가기 →</a><span class="msg"></span></div>
-<ol class="slots"><li><b>a</b> ⬜ 기다리던 버스가 두 대 나란히 들어오는 정류장<div class="pr">Photorealistic photo of two city buses arriving one right behind the other at a city bus stop on a rainy evening, the first bus crowded, the second bus almost empty, wet reflective road, people waiting under the shelter seen from behind, no readable route numbers, no company logos, no readable text</div></li><li><b>b</b> ⬜ 출발하지 않고 잠깐 서 있는 버스, 다음 정류장의 누군가를 위해<div class="pr">Photorealistic photo of a single city bus waiting at a quiet bus stop at dusk with its doors open and engine idling, warm interior light, a few passengers seated, calm mood, no readable route numbers, no logos, no readable text</div></li></ol><textarea id="pq" class="cp">아래 블로그 글에 넣을 실사 사진 2장을 만들어 줘. 각각 따로, 가로 3:2, 사진처럼 자연스럽게. 실존 인물·알아볼 수 있는 얼굴·상표·로고·읽을 수 있는 글자는 넣지 마.
+<ol class="slots"><li><b>a</b> ⬜ 출발하지 않고 잠깐 서 있는 버스<div class="pr">Photorealistic photo of a single city bus waiting at a quiet bus stop at dusk with its doors open and engine idling, warm interior light, a few passengers seated, calm mood, no readable route numbers, no logos, no readable text</div></li><li><b>b</b> ⬜ 기다리던 버스가 두 대 나란히 들어오는 정류장<div class="pr">Photorealistic photo of two city buses arriving one right behind the other at a city bus stop on a rainy evening, the first bus crowded, the second bus almost empty, wet reflective road, people waiting under the shelter seen from behind, no readable route numbers, no company logos, no readable text</div></li></ol><textarea id="pq" class="cp">아래 블로그 글에 넣을 실사 사진 2장을 만들어 줘. 각각 따로, 가로 3:2, 사진처럼 자연스럽게. 실존 인물·알아볼 수 있는 얼굴·상표·로고·읽을 수 있는 글자는 넣지 마.
 
 글 제목: 버스는 왜 꼭 두 대씩 같이 올까? — 2초 늦은 버스 한 대의 6시간
 
-[a] 기다리던 버스가 두 대 나란히 들어오는 정류장
-Photorealistic photo of two city buses arriving one right behind the other at a city bus stop on a rainy evening, the first bus crowded, the second bus almost empty, wet reflective road, people waiting under the shelter seen from behind, no readable route numbers, no company logos, no readable text
+[a] 출발하지 않고 잠깐 서 있는 버스
+Photorealistic photo of a single city bus waiting at a quiet bus stop at dusk with its doors open and engine idling, warm interior light, a few passengers seated, calm mood, no readable route numbers, no logos, no readable text
 
-[b] 출발하지 않고 잠깐 서 있는 버스, 다음 정류장의 누군가를 위해
-Photorealistic photo of a single city bus waiting at a quiet bus stop at dusk with its doors open and engine idling, warm interior light, a few passengers seated, calm mood, no readable route numbers, no logos, no readable text</textarea></section></main><footer class="foot">시뮬라티오 랩 · Lab장 · <a href="https://simulatiolab.com" target="_blank" rel="noopener">simulatiolab.com</a> · <a href="../../rss.xml">RSS</a></footer>
-<script src="../../app.js?v=202611180747"></script></body></html>
+[b] 기다리던 버스가 두 대 나란히 들어오는 정류장
+Photorealistic photo of two city buses arriving one right behind the other at a city bus stop on a rainy evening, the first bus crowded, the second bus almost empty, wet reflective road, people waiting under the shelter seen from behind, no readable route numbers, no company logos, no readable text</textarea></section></main><footer class="foot">시뮬라티오 랩 · Lab장 · <a href="https://simulatiolab.com" target="_blank" rel="noopener">simulatiolab.com</a> · <a href="../../rss.xml">RSS</a></footer>
+<script src="../../app.js?v=202611180816"></script></body></html>
