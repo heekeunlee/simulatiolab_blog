@@ -1,0 +1,69 @@
+:root{--bg:#f3f1ec;--page:#fffefb;--ink:#2b2824;--mut:#8b847a;--acc:#7a5c3e;--line:#e6e1d8;--green:#1f9d63;--warn:#c98a12;--chip:#f4efe7;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Nanum Gothic",-apple-system,sans-serif}
+a{color:var(--acc)}
+.top{position:sticky;top:0;z-index:5;background:rgba(255,254,251,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:8px;font-weight:800;color:var(--ink);text-decoration:none;font-size:16px}
+.logo{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:8px;background:var(--acc);color:#fff;font:800 15px "Nanum Myeongjo",serif}
+.logo.s{width:22px;height:22px;font-size:12px;border-radius:6px;margin-right:6px}
+.top nav{display:flex;gap:14px;flex-wrap:wrap}.top nav a{color:var(--mut);text-decoration:none;font-size:14px;font-weight:700}.top nav a:hover{color:var(--ink)}
+.foot{text-align:center;color:var(--mut);font-size:13px;padding:40px 16px 60px}
+/* 글 */
+.post{max-width:760px;margin:24px auto 0;background:var(--page);padding:56px clamp(18px,8vw,88px) 64px;box-shadow:0 1px 3px rgba(0,0,0,.05);font-family:"Nanum Myeongjo",serif}
+.cat{font:700 12px "Nanum Gothic",sans-serif;color:var(--mut);letter-spacing:.06em}
+.post h1{font-weight:800;font-size:clamp(25px,4.6vw,34px);line-height:1.4;margin:12px 0 6px;word-break:keep-all}
+.sub{color:var(--mut);font-size:17px;margin:0 0 18px}
+.meta{display:flex;gap:14px;align-items:center;font:13px "Nanum Gothic",sans-serif;color:var(--mut);padding-bottom:28px;border-bottom:1px solid var(--line);margin-bottom:36px}
+.who{display:flex;align-items:center;font-weight:700;color:var(--ink)}
+#body p{font-size:17px;line-height:2.05;margin:0 0 24px;word-break:keep-all}
+#body h3{font-size:21px;font-weight:800;margin:48px 0 18px;color:var(--acc)}
+#body ul,#body ol{font-size:17px;line-height:2;margin:0 0 24px;padding-left:24px}
+.orn{text-align:center;color:var(--mut);letter-spacing:.5em;margin:44px 0!important}
+.pull{font-size:21px!important;font-weight:700;text-align:center;margin:34px 0!important}
+figure{margin:8px 0 30px;text-align:center}figure img{max-width:100%;max-height:640px;border:1px solid var(--line);border-radius:4px}
+figcaption{font:13px/1.6 "Nanum Gothic",sans-serif;color:var(--mut);margin-top:8px}
+.link{background:var(--chip);padding:16px 18px;border-radius:6px;font-size:15px!important;line-height:1.8!important}.link a{font-weight:700}
+blockquote{margin:40px 0;padding:24px 10px;text-align:center;font-size:22px;font-weight:700;border-top:1px solid var(--ink);border-bottom:1px solid var(--line)}
+.note{font:13px/1.8 "Nanum Gothic",sans-serif!important;color:var(--mut);border-top:1px solid var(--line);padding-top:18px;margin-top:40px!important}
+.sign{text-align:right;color:var(--mut);font-size:15px}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin:34px 0 20px}
+.btn{display:inline-block;background:var(--acc);color:#fff;text-decoration:none;font:700 15px "Nanum Gothic",sans-serif;padding:12px 18px;border-radius:8px}
+.btn.ghost{background:#fff;color:var(--acc);border:1px solid var(--acc)}
+.tags{font:14px/2 "Nanum Gothic",sans-serif;color:var(--acc)}.tags span{margin-right:8px}
+.pn{display:flex;justify-content:space-between;gap:12px;margin-top:36px;padding-top:20px;border-top:1px solid var(--line);font:13px "Nanum Gothic",sans-serif}
+.pn a{color:var(--mut);text-decoration:none;max-width:48%}.pn a:hover{color:var(--ink)}
+.sched{background:#fff6e0;border:1px solid #f0d38a;color:#7a5600;font:700 14px "Nanum Gothic",sans-serif;padding:10px 14px;border-radius:8px;margin-bottom:24px}
+.naver{margin-top:40px;padding:20px;border:2px dashed var(--green);border-radius:10px;font-family:"Nanum Gothic",sans-serif}
+.naver h2{margin:0 0 8px;font-size:18px;color:var(--green)}.naver p{font-size:13px;line-height:1.8;color:#444}
+.nbtn{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.nbtn button{font:700 14px "Nanum Gothic",sans-serif;border:0;background:var(--green);color:#fff;border-radius:6px;padding:10px 14px;cursor:pointer}
+.msg{color:var(--green);font-size:13px;font-weight:700}
+.cp{position:absolute;left:-9999px;top:0;width:700px}
+/* 목록 */
+.home{max-width:1080px;margin:24px auto 0;padding:0 16px;display:grid;grid-template-columns:260px 1fr;gap:24px}
+.prof{background:var(--page);border-radius:12px;padding:24px;box-shadow:0 1px 3px rgba(0,0,0,.05);align-self:start;position:sticky;top:70px}
+.prof .logo{width:64px;height:64px;font-size:32px;border-radius:16px}
+.prof h2{font:800 20px "Nanum Myeongjo",serif;margin:14px 0 4px}.prof p{color:#555;font-size:14px;line-height:1.7}
+.prof .cats a{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink);font-size:14px}
+.prof .cats a.on{color:var(--acc);font-weight:800}
+.list{display:flex;flex-direction:column;gap:16px}
+.card{display:grid;grid-template-columns:1fr 180px;gap:18px;background:var(--page);border-radius:12px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,.05);text-decoration:none;color:var(--ink)}
+.card:hover{box-shadow:0 4px 14px rgba(0,0,0,.08)}
+.card h3{font:800 19px/1.45 "Nanum Myeongjo",serif;margin:4px 0 8px;word-break:keep-all}.card p{color:#666;font-size:14px;line-height:1.7;margin:0 0 10px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.card .d{font-size:12px;color:var(--mut)}.card img{width:180px;height:130px;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
+.next{background:#fff6e0;border:1px solid #f0d38a;border-radius:12px;padding:14px 18px;font-size:14px;color:#7a5600}
+.empty{color:var(--mut);padding:40px;text-align:center}
+@media (max-width:780px){.home{grid-template-columns:1fr}.prof{position:static}.card{grid-template-columns:1fr 110px}.card img{width:110px;height:90px}}
+/* 대시보드 */
+.dash{max-width:1100px;margin:24px auto 0;padding:0 16px}
+.dash h1{font:800 26px "Nanum Myeongjo",serif;margin:0 0 4px}.dash .lead{color:var(--mut);margin:0 0 20px;font-size:14px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:20px}
+.kpi{background:var(--page);border-radius:12px;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,.05)}.kpi b{display:block;font-size:26px;margin-top:4px}.kpi span{color:var(--mut);font-size:13px}
+.tbl{background:var(--page);border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,.05);overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:820px;font-size:14px}th,td{padding:11px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+th{background:#f7f4ee;font-size:12px;color:var(--mut);white-space:nowrap}td.n{font-weight:800;color:var(--acc);white-space:nowrap}td.dt{white-space:nowrap}
+.st{display:inline-block;font-size:12px;font-weight:800;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.st.pub{background:#e3f5ec;color:var(--green)}.st.nav{background:#03c75a;color:#fff}.st.res{background:#fff1d6;color:#9a6b00}.st.plan{background:#eee;color:#777}.st.late{background:#fde8e6;color:#c0392b}
+.acts a{margin-right:10px;font-weight:700;white-space:nowrap}
+.today td{background:#fffaf0}
+.howto{margin:20px 0;background:var(--page);border-radius:12px;padding:18px 20px;font-size:14px;line-height:1.8;color:#444}
+.howto h2{font-size:16px;margin:0 0 6px}

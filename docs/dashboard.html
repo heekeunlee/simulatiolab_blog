@@ -1,0 +1,17 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>블로그 대시보드 · 시뮬라티오 랩</title><meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"></head><body>
+<header class="top"><a class="brand" href="./"><span class="logo">S</span>시뮬라티오 랩 블로그</a><nav><a href="./">글 목록</a><a href="https://simulatiolab.com" target="_blank" rel="noopener">실험실</a><a href="https://www.youtube.com/@simulatiolab" target="_blank" rel="noopener">유튜브</a><a href="dashboard.html">대시보드</a></nav></header>
+<main class="dash">
+<h1>블로그 대시보드</h1><p class="lead" id="built">불러오는 중…</p>
+<div class="kpis" id="kpis"></div>
+<div class="tbl"><table><thead><tr><th>편</th><th>공개일</th><th>제목</th><th>상태</th><th>실험 · 영상</th><th>할 일</th></tr></thead><tbody id="dash"></tbody></table></div>
+<div class="howto"><h2>이렇게 돌아가요</h2>
+① 글은 저장소 <code>content/</code>에 있고, <b>공개일이 되면 블로그 첫 화면에 저절로</b> 나와요(매일 0시 자동 갱신). 2~3일 간격(대개 화·목·토).<br>
+② 공개된 글은 <b>"네이버 옮기기"</b>를 눌러 제목·본문·태그를 복사해 네이버 블로그에 붙여 넣어요. 사진도 함께 붙어요.<br>
+③ 네이버에 올린 뒤 그 주소를 글 파일의 <code>naver_url</code>에 적으면 상태가 <span class="st nav">네이버 게시</span>로 바뀌어요. (Claude에게 "N편 네이버 주소는 …"이라고 말하면 대신 적어요.)<br>
+④ 나중에 네이버와 연동할 때는 <a href="rss.xml">RSS 피드</a>(공개된 글만)를 써요.</div>
+</main>
+<footer class="foot">시뮬라티오 랩 · Lab장 · <a href="https://simulatiolab.com" target="_blank" rel="noopener">simulatiolab.com</a></footer>
+<script src="app.js"></script></body></html>
