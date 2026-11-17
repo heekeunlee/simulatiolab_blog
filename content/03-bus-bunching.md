@@ -14,27 +14,23 @@ teaser: 새치기는 분명 이득이다. 그런데 왜 대부분의 사람은 �
 ---
 버스가 정류장에 섰다. 탈 사람은 다 탔다. 문도 닫혔다. 그런데 출발하지 않는다.
 
-십 초. 이십 초. 나는 속으로 기사님을 재촉했다. 아니, 왜 안 가요.
-
-그날 저녁 나는 그 버스를 다시 생각하게 됐다. 정확히는, 그 버스가 왜 기다렸는지 알게 됐다.
+십 초. 이십 초. 나는 속으로 기사님을 재촉했다. 아니, 왜 안 가요. 약속 시간은 다가오고, 휴대폰 시계 숫자가 자꾸 커 보인다. 다른 승객들도 하나둘 창밖을 본다. 말은 없어도 다 같은 마음이다.
 
 {{photo a | 출발하지 않고 잠깐 서 있는 버스 | Photorealistic photo of a single city bus waiting at a quiet bus stop at dusk with its doors open and engine idling, warm interior light, a few passengers seated, calm mood, no readable route numbers, no logos, no readable text}}
 
----
-
-### 버스는 왜 두 대씩 올까
-
-먼저 반대 장면부터. 배차 간격 5분이라던 버스를 한참 기다렸는데, 두 대가 나란히 온다. 앞차는 꽉 찼고, 뒤차는 텅 비었다.
+기다림이 유독 서러운 날이 있다. 찬 바람 부는 저녁, 정류장에서 앱을 새로 고칠 때마다 "곧 도착"이 "7분"으로 바뀌는 날. 그렇게 한참을 떨다가 마침내 버스가 온다. **두 대가 나란히.** 앞차는 꽉 찼고, 뒤차는 텅 비었다.
 
 {{photo b | 기다리던 버스가 두 대 나란히 들어오는 정류장 | Photorealistic photo of two city buses arriving one right behind the other at a city bus stop on a rainy evening, the first bus crowded, the second bus almost empty, wet reflective road, people waiting under the shelter seen from behind, no readable route numbers, no company logos, no readable text}}
 
-기사님이 게으른 걸까. 배차를 엉터리로 짠 걸까. 궁금한 건 못 참는 성격이라, 컴퓨터 속에 버스 노선을 하나 만들었다.
+그 순간의 감정은 짜증보다 허탈함에 가깝다. 저 두 대가 5분씩만 떨어져 왔어도, 나는 덜 추웠을 텐데.
 
-!! 아무도 잘못하지 않아도, 버스는 뭉친다.
+!! 왜 하필, 꼭 두 대씩일까.
 
 ---
 
 ### 2초의 시작
+
+기사님이 게으른 걸까. 배차를 엉터리로 짠 걸까. 궁금한 건 못 참는 성격이라, 결국 컴퓨터 속에 버스 노선을 하나 만들었다.
 
 정류장 24곳을 도는 순환 노선. 버스 6대가 약 4분 40초 간격으로 고르게 출발한다. 승객은 정류장마다 꾸준히 와서 줄을 서고, 버스는 줄이 빌 때까지 태운다.
 
@@ -67,6 +63,8 @@ teaser: 새치기는 분명 이득이다. 그런데 왜 대부분의 사람은 �
 ![6시간 뒤, 버스 6대가 한 덩어리로](img/03/convoy.jpg)
 
 정류장에서 기다리는 시간은 평균 2.3분에서 9.1분이 됐다. 버스 수도, 승객 수도, 도로도 그대로인데.
+
+!! 아무도 잘못하지 않아도, 버스는 뭉친다.
 
 @@ 버스를 늘리거나, 일부러 기다리게 하면 어떻게 될까. 직접 돌려 보자. | 버스 몰림 실험, 직접 돌려 보기 | https://simulatiolab.com/bunching
 
