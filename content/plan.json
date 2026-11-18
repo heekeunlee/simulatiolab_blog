@@ -1,7 +1,5 @@
 [
-  {"no": 8, "date": "2026-12-03", "title": "모든 내기가 공평한데 왜 한 사람이 다 가질까(부의 쏠림)", "experiment": "wealth", "video": "https://youtube.com/shorts/6ovJqQ_BFto", "note": "돈 주제: 광고 단가 높음"},
-  {"no": 9, "date": "2026-12-05", "title": "마트 계산대, 어느 줄에 서야 빨리 끝날까 — 줄 4개 vs 한 줄", "experiment": "checkout", "video": "https://youtube.com/shorts/SP-0D_L3QgE", "note": "생활 검색어"},
-  {"no": 10, "date": "2026-12-08", "title": "도로를 새로 뚫었는데 왜 더 막힐까(브라에스 역설)", "experiment": "braess", "video": "https://youtube.com/shorts/DIUHq6UK9Zs", "note": ""},
-  {"no": 11, "date": "2026-12-10", "title": "아무도 원하지 않았는데 동네가 갈라지는 이유(셸링 분리 모델)", "experiment": "schelling", "video": "https://youtube.com/shorts/p2Dtk-wOUHE", "note": "인종 이야기는 원 연구 맥락만 짧게, 색 두 가지로 설명"},
-  {"no": 12, "date": "2026-12-12", "title": "붐빌까 봐 안 갔더니 텅 비었다 — 엘 파롤 바 문제", "experiment": "bar", "video": "https://youtube.com/shorts/n-b82FaFw-w", "note": ""}
+  {"no": 13, "date": "2026-12-15", "title": "성공은 재능일까, 운일까 — 1,000명의 40년을 돌려 보았다", "experiment": "talent-vs-luck", "video": "https://youtube.com/shorts/3zXaoMD-jms", "note": "대표 실험. 12편 예고에서 약속한 숫자(시드1 기본값): 최고 부자 2,560 · 최고 재능(0.91)은 0.005 · 최고 부자 재능 0.59(평균 0.60) · 상위 20%가 80.4%"},
+  {"no": 14, "date": "2026-12-17", "title": "버스는 10분마다 오는데 왜 나는 더 오래 기다릴까(검사 역설)", "experiment": "inspection", "video": "https://youtube.com/shorts/QcfjqGzFvSk", "note": ""},
+  {"no": 15, "date": "2026-12-19", "title": "지하철 7인석에 왜 3명만 앉을까", "experiment": "seating", "video": "https://youtube.com/shorts/2eSAk2eJ-Qc", "note": ""}
 ]
