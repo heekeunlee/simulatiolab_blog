@@ -22,3 +22,8 @@
 공개된 글 페이지 주소 뒤에 `#naver`를 붙이면 제목·본문(사진 포함)·태그 복사 버튼이 나온다. 네이버에 올린 뒤 주소를 글 파일의 `naver_url`에 적으면 대시보드 상태가 바뀐다. 나중에 자동 연동은 `rss.xml`을 쓴다.
 
 글 속 숫자는 [simulatiolab.com](https://simulatiolab.com)의 시뮬레이션 모델을 실제로 돌린 값이다. 글 정리에 AI(Claude)의 도움을 받았다.
+
+## 실험·영상 링크와 QR (2026-11-18)
+- 글마다 맨 위 한 줄 링크(실험·쇼츠·롱폼·채널 구독)와 글 끝 "영상과 실험으로 더 보기" QR 상자가 자동으로 붙는다. 네이버 옮기기 본문에도 QR 모음 그림 한 장과 주소가 들어간다.
+- 주소는 `links.json`(사이트·채널·롱폼). 롱폼이 늘면 여기만 고친다.
+- QR 그림은 **이 컴퓨터에서** 만든다(서버엔 한글 글꼴이 없음): `python3 -m venv .venv && .venv/bin/pip install segno pillow` 한 번, 그 뒤 새 글을 쓸 때마다 `.venv/bin/python qr.py` → `content/img/qr/`

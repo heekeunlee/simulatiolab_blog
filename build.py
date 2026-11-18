@@ -183,6 +183,44 @@ FOOT = '''<footer class="foot">시뮬라티오 랩 · Lab장 · <a href="https:/
 <script src="{base}app.js?v={ver}"></script></body></html>'''
 
 
+LINKS = json.load(open(os.path.join(ROOT, 'links.json'), encoding='utf-8'))
+
+
+def more_items(meta):
+    """QR 상자 칸: (아이콘, 라벨, 작은 글, 주소, QR 파일). qr.py와 같은 순서"""
+    L, nn = LINKS, f"{meta['no']:02d}"
+    exp, video, lf = meta.get('experiment'), meta.get('video') or '', L['longform']
+    it = []
+    if exp: it.append(('🧪', '직접 돌려 보기', f'simulatiolab.com/{exp}', f'https://simulatiolab.com/{exp}', f'{nn}-exp.png'))
+    if video and lf['id'] not in video:
+        it.append(('▶', '쇼츠 영상', '30초 요약', video, f'{nn}-video.png'))
+        it.append(('🎬', '롱폼 영상', lf['short'], lf['url'], 'longform.png'))
+    elif video:
+        it.append(('🎬', '이 이야기 영상', '8분 롱폼', lf['url'], 'longform.png'))
+        it.append(('🧪', '실험실 전체', 'simulatiolab.com', L['site'], 'site.png'))
+    it.append(('📺', '채널 구독', '@simulatiolab', L['channel_sub'], 'channel.png'))
+    return it
+
+
+def quick(meta, naver=False):
+    """글 맨 위 한 줄 링크"""
+    it = more_items(meta)
+    if naver:
+        return '<p><span style="font-size:13px;color:#8b847a">' + ' · '.join(f'{i} <a href="{u}">{l}</a>' for i, l, _, u, _ in it) + '</span></p>'
+    return '<div class="quick">' + ''.join(f'<a href="{u}" target="_blank" rel="noopener">{i} {l}</a>' for i, l, _, u, _ in it) + '</div>'
+
+
+def more_box(meta, base='', naver=False):
+    """글 끝 QR 상자: 실험·쇼츠·롱폼·채널"""
+    it, nn = more_items(meta), f"{meta['no']:02d}"
+    if naver:
+        lines = ''.join(f'<p>{i} {l}: <a href="{u}">{u.replace("https://", "")}</a></p>' for i, l, _, u, _ in it)
+        return (f'<p><br></p><p style="text-align:center"><b><span style="font-size:17px;color:#7a5c3e">이 이야기, 영상과 실험으로 더 보기</span></b></p>'
+                f'<p style="text-align:center"><img src="{SITE}img/qr/{nn}-card.jpg" alt="실험·영상·채널 QR 코드"></p>{lines}')
+    cards = ''.join(f'<a class="q" href="{u}" target="_blank" rel="noopener"><img src="{base}img/qr/{f}" alt="{l} QR" loading="lazy"><b>{i} {l}</b><span>{html.escape(sm)}</span></a>' for i, l, sm, u, f in it)
+    return f'<section class="more"><h2>이 이야기, 영상과 실험으로 더 보기</h2><div class="qrs">{cards}</div><p>휴대폰 카메라로 QR을 비추면 바로 열려요 · 실험 80여 개는 <a href="{LINKS["site"]}" target="_blank" rel="noopener">simulatiolab.com</a></p></section>'
+
+
 def teaser(meta, nxt, naver=False):
     """다음 편 예고: front matter의 teaser + 다음 편 제목·공개일"""
     if not meta.get('teaser') or not nxt: return ''
@@ -247,15 +285,16 @@ def main():
         sched = '' if meta['published'] else f'<div class="sched">⏰ 예약 글 · {daystr(meta["date"])} 공개 예정</div>'
         PH = dict(photos=meta['photos'], extra=meta['extra'])
         nxt_meta = next_ or next((x for x in PLAN if x['no'] == meta['no'] + 1), None)
-        naverhtml = render(body, naver=True, **PH) + f'<p><br></p><p>👉 직접 돌려 보기: <a href="https://simulatiolab.com/{exp}">simulatiolab.com/{exp}</a></p><p style="text-align:right;color:#8b847a">— 시뮬라티오 랩, Lab장</p>' + teaser(meta, nxt_meta, naver=True)
+        naverhtml = quick(meta, naver=True) + render(body, naver=True, **PH) + '<p style="text-align:right;color:#8b847a">— 시뮬라티오 랩, Lab장</p>' + more_box(meta, naver=True) + teaser(meta, nxt_meta, naver=True)
         page = HEAD.format(title=html.escape(meta['title']) + ' | ' + BLOG, desc=html.escape(meta['excerpt']), image=SITE + meta['cover'], ogtype='article', blog=BLOG, base=base, ver=ver) + f'''
 <main class="post">{sched}
 <div class="cat">{html.escape(meta['category'])} · {meta['no']}편</div>
 <h1>{html.escape(meta['title'])}</h1><p class="sub">{html.escape(meta.get('subtitle', ''))}</p>
 <div class="meta"><span class="who"><span class="logo s">S</span>Lab장</span><span>{daystr(meta['date'])}</span></div>
+{quick(meta)}
 <article id="body">{render(body, base=base, **PH)}</article>
 <p class="sign">— 시뮬라티오 랩, Lab장</p>
-{cta}{teaser(meta, nxt_meta)}<div class="tags">{tags}</div>{nav}
+{more_box(meta, base=base)}{teaser(meta, nxt_meta)}<div class="tags">{tags}</div>{nav}
 <section id="naver" class="naver" hidden>
 <h2>네이버 블로그로 옮기기</h2>
 <p>① 제목 → 제목 칸 ⌘V · ② 본문 → 본문 ⌘V (사진도 함께 붙어요. 안 붙으면 사진만 따로 올리기) · ③ 태그 → 발행 창 태그 칸 · ④ 카테고리 "{html.escape(meta['category'])}" · ⑤ 발행 뒤 네이버 주소를 content/{meta['no']:02d}-{meta['slug']}.md 의 naver_url에 적기</p>
