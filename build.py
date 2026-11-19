@@ -291,6 +291,43 @@ def photo_box(meta):
 <ol class="slots">{rows}</ol><textarea id="pq" class="cp">{html.escape(req)}</textarea></section>'''
 
 
+def essays(ver):
+    """content/essays: '실험 뒤의 생각' 작성 대기실(네이버가 원본 → noindex). /essays/ 안내·목록, /essays/<slug>/ 네이버 옮기기"""
+    E = os.path.join(SRC, 'essays')
+    if not os.path.isdir(E): return 0
+    NOIDX = '<meta name="robots" content="noindex,nofollow"></head>'
+    def page(title, base, inner):
+        h = HEAD.format(title=html.escape(title) + ' | 실험 뒤의 생각', desc='실험 뒤의 생각 · 작성 대기', image=SITE + 'img/qr/01-card.jpg', ogtype='article', blog=BLOG, base=base, ver=ver)
+        return h.replace('</head>', NOIDX, 1) + inner + FOOT.format(base=base, ver=ver)
+    topics = json.load(open(os.path.join(E, 'topics.json'), encoding='utf-8'))
+    done = {}
+    for fn in sorted(os.listdir(E)):
+        if not re.match(r'\d+-.*\.md$', fn): continue
+        meta, body = front(open(os.path.join(E, fn), encoding='utf-8').read())
+        done[meta['no']] = meta
+        d = os.path.join(OUT, 'essays', meta['slug']); os.makedirs(d, exist_ok=True)
+        tail = f'<p style="text-align:right;color:#8b847a">— Lab장 (시뮬라티오 랩)</p>' + EMPTY + f'<p><span style="color:#8b847a">이 생각이 시작된 실험, 직접 돌려 보기 →</span> <a href="{meta["link"]}">{meta["link"].replace("https://", "")}</a></p>'
+        nb = render(body, naver='nb') + EMPTY * 2 + tail
+        inner = f'''<main class="post"><div class="sched">📝 {html.escape(meta.get('status', '대기'))} · 네이버 예약 {html.escape(meta.get('planned', ''))}</div>
+<div class="cat">실험 뒤의 생각 · {meta['no']}편 · 짝 실험 글 <a href="../../p/{meta['pair']}/">{meta['pair']}</a></div>
+<h1>{html.escape(meta['title'])}</h1>
+<section id="naver" class="naver">
+<h2>네이버 블로그로 옮기기</h2>
+<p>① 제목 → 제목 칸 ⌘V · ② 본문 → 본문 ⌘V · ③ 태그 → 발행 창 태그 칸 · ④ 카테고리 <b>실험 뒤의 생각</b> · 주제 <b>일상·생각</b> · ⑤ 소제목은 굵게+마루부리, 큰 문장(!!)은 가운데 정렬 · ⑥ 발행 뒤 status를 '발행'으로</p>
+<div class="nbtn"><button data-copy="nt">① 제목 복사</button><button data-copy="nb">② 본문 복사</button><button data-copy="ng">③ 태그 복사</button><span class="msg"></span></div>
+<div id="nt" class="cp">{html.escape(meta['title'])}</div><div id="nb" class="cp">{nb}</div><textarea id="ng" class="cp">{', '.join(meta['tags'])}</textarea>
+</section>
+<article id="body">{render(body, base='../../')}</article><p class="sign">— Lab장</p></main>'''
+        open(os.path.join(d, 'index.html'), 'w', encoding='utf-8').write(page(meta['title'], '../../', inner))
+    _, guide = '', open(os.path.join(E, 'GUIDE.md'), encoding='utf-8').read()
+    rows = ''.join(f'<li><b>{t["no"]}.</b> ' + (f'<a href="{done[t["no"]]["slug"]}/">{html.escape(t["title"])}</a> <span class="ok">✍️ {html.escape(done[t["no"]].get("status", "대기"))}</span>' if t['no'] in done else f'{html.escape(t["title"])} <span class="todo">· 아직</span>') + f'<br><small>짝 실험 글 <a href="../p/{t["pair"]}/">{t["pair"]}</a> · {html.escape(t["idea"])}</small></li>' for t in topics)
+    inner = f'''<main class="post"><div class="cat">네이버 블로그 카테고리 · 작성 대기실</div><h1>실험 뒤의 생각</h1><p class="sub">인문학적 메시지 · 일상 속 인사이트 · 작은 글, 큰 울림</p>
+<article id="body">{render(guide, base='../')}<h3>글 목록 ({len(done)}/{len(topics)})</h3><ol class="essays" style="list-style:none;padding:0">{rows}</ol></article></main>'''
+    os.makedirs(os.path.join(OUT, 'essays'), exist_ok=True)
+    open(os.path.join(OUT, 'essays', 'index.html'), 'w', encoding='utf-8').write(page('작성 대기실', '../', inner))
+    return len(done)
+
+
 def main():
     ver = dt.datetime.now(KST).strftime('%Y%m%d%H%M')
     if os.path.exists(OUT): shutil.rmtree(OUT)
@@ -356,6 +393,8 @@ def main():
     rss = f'''<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>{BLOG}</title><link>{SITE}</link><description>작은 규칙, 큰 세상 — 시뮬레이션으로 돌려 보는 '왜 그럴까'</description><language>ko</language>\n{items}</channel></rss>'''
     open(os.path.join(OUT, 'rss.xml'), 'w', encoding='utf-8').write(rss)
     open(os.path.join(OUT, '.nojekyll'), 'w').write('')
+    ne = essays(ver)
+    print(f'에세이 {ne}편 · ', end='')
     print(f'{len(posts)}편 (공개 {sum(m["published"] for m, _ in posts)}) · 계획 {len(plan)}편 · {TODAY}')
 
 

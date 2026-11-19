@@ -27,3 +27,8 @@
 - 글마다 맨 위 한 줄 링크(실험·쇼츠·롱폼·채널 구독)와 글 끝 "영상과 실험으로 더 보기" QR 상자가 자동으로 붙는다. 네이버 옮기기 본문에도 QR 모음 그림 한 장과 주소가 들어간다.
 - 주소는 `links.json`(사이트·채널·롱폼). 롱폼이 늘면 여기만 고친다.
 - QR 그림은 **이 컴퓨터에서** 만든다(서버엔 한글 글꼴이 없음): `python3 -m venv .venv && .venv/bin/pip install segno pillow` 한 번, 그 뒤 새 글을 쓸 때마다 `.venv/bin/python qr.py` → `content/img/qr/`
+
+## 실험 뒤의 생각 (네이버 전용 인문학 에세이, 2026-11-19)
+- `content/essays/GUIDE.md` 쓰는 기준 · `topics.json` 12편 주제 · `NN-slug.md` 원고(status 대기/발행, planned 네이버 예약 시각)
+- 작성 대기실: https://heekeunlee.github.io/simulatiolab_blog/essays/ (네이버가 원본이라 noindex, 글 목록·RSS에 안 나옴)
+- 글마다 /essays/slug/ 에 네이버 옮기기(제목·본문·태그 복사) 상자
