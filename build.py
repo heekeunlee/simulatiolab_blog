@@ -54,7 +54,7 @@ def inline(s, absolute=False):
 
 
 SENT_RE = re.compile(r'(?<=[.?!…])(\*\*)?(["”’\')]*)\s+')
-def mobile_lines(s, limit=26, minpart=7):
+def mobile_lines(s, limit=26, minpart=7, grouped=False):
     """네이버(휴대폰)용: 문장마다 줄 바꾸고, 긴 문장은 쉼표에서 한 번 더 끊는다(B안)"""
     keep = []
     s = re.sub(r'\[(.+?)\]\((https?://[^)]+)\)', lambda m: keep.append(m.group(0)) or f'\x00{len(keep)-1}\x00', s)
@@ -70,15 +70,24 @@ def mobile_lines(s, limit=26, minpart=7):
             half = vis(cur) / 2
             c = min(cuts, key=lambda i: abs(vis(cur[:i]) - half))
             parts[-1:] = [cur[:c].rstrip(), cur[c:]]
-        lines += parts
+        lines += [(k, x) for k, x in enumerate(parts)]
     out, bold = [], False
-    for t in lines:
+    for k, t in lines:
         if bold: t = '**' + t
         bold = t.count('**') % 2 == 1
         if bold: t += '**'
         t = re.sub(r'\x00(\d+)\x00', lambda m: keep[int(m.group(1))], t)
-        out.append(t.replace('****', ''))
+        t = t.replace('****', '')
+        if grouped and k == 0: out.append([t])
+        elif grouped: out[-1].append(t)
+        else: out.append(t)
     return out
+
+
+EMPTY = '<p><br></p>'
+def nb_para(s):
+    """C안: 문장마다 빈 줄. 쉼표에서 끊은 줄은 같은 덩어리"""
+    return EMPTY.join('<p>' + '<br>'.join(inline(x) for x in g) + '</p>' for g in mobile_lines(s, grouped=True))
 
 
 def blocks(body):
@@ -148,10 +157,10 @@ def render(body, naver=False, base='', photos=None, extra=()):
             h.append(f'<ol>{items}</ol>')
         else:
             if naver == 'nb':
-                h.append('<p>' + '<br>'.join(inline(y) for x in b for y in mobile_lines(x)) + '</p>')
+                h.append(EMPTY.join(nb_para(x) for x in b))
             else:
                 h.append('<p>' + '<br>'.join(inline(x) for x in b) + '</p>')
-    return '\n'.join(h)
+    return ('\n' + EMPTY * 2 + '\n' if naver == 'nb' else '\n').join(h)
 
 
 def plain(body):
@@ -258,7 +267,7 @@ def teaser(meta, nxt, naver=False):
     when = daystr(nxt['date'])
     if naver:
         return (f'<p><br></p><p style="text-align:center;color:#8b847a">· · ·</p><p><b><span style="font-size:17px;color:#7a5c3e">📮 다음 편 예고 · {when}</span></b></p>'
-                f'<p><b>{html.escape(nxt["title"])}</b></p><p>{"<br>".join(inline(y) for y in mobile_lines(meta["teaser"]))}</p><p><span style="color:#8b847a">이웃 추가해 두시면 새 글이 올라올 때 알려 드려요.</span></p>')
+                f'<p><b>{html.escape(nxt["title"])}</b></p>{nb_para(meta["teaser"])}<p><span style="color:#8b847a">이웃 추가해 두시면 새 글이 올라올 때 알려 드려요.</span></p>')
     link = f'../{nxt["slug"]}/' if nxt.get('slug') else ''
     head = f'<a href="{link}" class="tz" data-date="{nxt["date"]}">{html.escape(nxt["title"])}</a>' if link else html.escape(nxt['title'])
     return f'<aside class="teaser"><div class="th">📮 다음 편 예고 · <span>{when}</span></div><div class="tt">{head}</div><p>{inline(meta["teaser"])}</p></aside>'
