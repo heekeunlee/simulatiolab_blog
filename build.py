@@ -53,6 +53,34 @@ def inline(s, absolute=False):
     return s
 
 
+SENT_RE = re.compile(r'(?<=[.?!…])(\*\*)?(["”’\')]*)\s+')
+def mobile_lines(s, limit=26, minpart=7):
+    """네이버(휴대폰)용: 문장마다 줄 바꾸고, 긴 문장은 쉼표에서 한 번 더 끊는다(B안)"""
+    keep = []
+    s = re.sub(r'\[(.+?)\]\((https?://[^)]+)\)', lambda m: keep.append(m.group(0)) or f'\x00{len(keep)-1}\x00', s)
+    sents = [x for x in SENT_RE.sub(lambda m: (m.group(1) or '') + m.group(2) + '\n', s).split('\n') if x.strip()]
+    vis = lambda t: len(re.sub(r'\*\*|\x00\d+\x00', '', t))
+    lines = []
+    for t in sents:
+        parts = [t]
+        while vis(parts[-1]) > limit:
+            cur = parts[-1]
+            cuts = [m.end() for m in re.finditer(r', ', cur) if vis(cur[:m.end()]) >= minpart and vis(cur[m.end():]) >= minpart]
+            if not cuts: break
+            half = vis(cur) / 2
+            c = min(cuts, key=lambda i: abs(vis(cur[:i]) - half))
+            parts[-1:] = [cur[:c].rstrip(), cur[c:]]
+        lines += parts
+    out, bold = [], False
+    for t in lines:
+        if bold: t = '**' + t
+        bold = t.count('**') % 2 == 1
+        if bold: t += '**'
+        t = re.sub(r'\x00(\d+)\x00', lambda m: keep[int(m.group(1))], t)
+        out.append(t.replace('****', ''))
+    return out
+
+
 def blocks(body):
     out, cur = [], []
     for line in body.splitlines():
@@ -119,7 +147,10 @@ def render(body, naver=False, base='', photos=None, extra=()):
             items = ''.join(f'<li>{inline(re.sub(r"^\d+\. ", "", x))}</li>' for x in b)
             h.append(f'<ol>{items}</ol>')
         else:
-            h.append('<p>' + '<br>'.join(inline(x) for x in b) + '</p>')
+            if naver == 'nb':
+                h.append('<p>' + '<br>'.join(inline(y) for x in b for y in mobile_lines(x)) + '</p>')
+            else:
+                h.append('<p>' + '<br>'.join(inline(x) for x in b) + '</p>')
     return '\n'.join(h)
 
 
@@ -227,7 +258,7 @@ def teaser(meta, nxt, naver=False):
     when = daystr(nxt['date'])
     if naver:
         return (f'<p><br></p><p style="text-align:center;color:#8b847a">· · ·</p><p><b><span style="font-size:17px;color:#7a5c3e">📮 다음 편 예고 · {when}</span></b></p>'
-                f'<p><b>{html.escape(nxt["title"])}</b></p><p>{inline(meta["teaser"])}</p><p><span style="color:#8b847a">이웃 추가해 두시면 새 글이 올라올 때 알려 드려요.</span></p>')
+                f'<p><b>{html.escape(nxt["title"])}</b></p><p>{"<br>".join(inline(y) for y in mobile_lines(meta["teaser"]))}</p><p><span style="color:#8b847a">이웃 추가해 두시면 새 글이 올라올 때 알려 드려요.</span></p>')
     link = f'../{nxt["slug"]}/' if nxt.get('slug') else ''
     head = f'<a href="{link}" class="tz" data-date="{nxt["date"]}">{html.escape(nxt["title"])}</a>' if link else html.escape(nxt['title'])
     return f'<aside class="teaser"><div class="th">📮 다음 편 예고 · <span>{when}</span></div><div class="tt">{head}</div><p>{inline(meta["teaser"])}</p></aside>'
@@ -285,7 +316,7 @@ def main():
         sched = '' if meta['published'] else f'<div class="sched">⏰ 예약 글 · {daystr(meta["date"])} 공개 예정</div>'
         PH = dict(photos=meta['photos'], extra=meta['extra'])
         nxt_meta = next_ or next((x for x in PLAN if x['no'] == meta['no'] + 1), None)
-        naverhtml = quick(meta, naver=True) + render(body, naver=True, **PH) + '<p style="text-align:right;color:#8b847a">— 시뮬라티오 랩, Lab장</p>' + more_box(meta, naver=True) + teaser(meta, nxt_meta, naver=True)
+        naverhtml = quick(meta, naver=True) + render(body, naver='nb', **PH) + '<p style="text-align:right;color:#8b847a">— 시뮬라티오 랩, Lab장</p>' + more_box(meta, naver=True) + teaser(meta, nxt_meta, naver=True)
         page = HEAD.format(title=html.escape(meta['title']) + ' | ' + BLOG, desc=html.escape(meta['excerpt']), image=SITE + meta['cover'], ogtype='article', blog=BLOG, base=base, ver=ver) + f'''
 <main class="post">{sched}
 <div class="cat">{html.escape(meta['category'])} · {meta['no']}편</div>
