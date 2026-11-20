@@ -85,6 +85,7 @@ def mobile_lines(s, limit=26, minpart=7, grouped=False):
 
 
 EMPTY = '<p><br></p>'
+GH_P = '<p style="line-height:2">'
 def nb_para(s):
     """C안: 문장마다 빈 줄. 쉼표에서 끊은 줄은 같은 덩어리"""
     return EMPTY.join('<p>' + '<br>'.join(inline(x) for x in g) + '</p>' for g in mobile_lines(s, grouped=True))
@@ -158,8 +159,12 @@ def render(body, naver=False, base='', photos=None, extra=()):
         else:
             if naver == 'nb':
                 h.append(EMPTY.join(nb_para(x) for x in b))
+            elif naver == 'gh':
+                h.append(GH_P + '<br>'.join(inline(x) for x in b) + '</p>')
             else:
                 h.append('<p>' + '<br>'.join(inline(x) for x in b) + '</p>')
+    if naver == 'gh':  # 깃허브 화면처럼: 문단 통째로, 문단 사이 빈 줄 하나, 소제목 앞은 두 줄
+        return '\n'.join((EMPTY * 2 if x.startswith('<p><b><span style="font-size:19px;color:#7a5c3e">') else EMPTY) + x if i else x for i, x in enumerate(h))
     return ('\n' + EMPTY * 2 + '\n' if naver == 'nb' else '\n').join(h)
 
 
@@ -261,13 +266,13 @@ def more_box(meta, base='', naver=False):
     return f'<section class="more"><h2>이 이야기, 영상과 실험으로 더 보기</h2><div class="qrs">{cards}</div><p>휴대폰 카메라로 QR을 비추면 바로 열려요 · 실험 80여 개는 <a href="{LINKS["site"]}" target="_blank" rel="noopener">simulatiolab.com</a></p></section>'
 
 
-def teaser(meta, nxt, naver=False):
+def teaser(meta, nxt, naver=False, mode='nb'):
     """다음 편 예고: front matter의 teaser + 다음 편 제목·공개일"""
     if not meta.get('teaser') or not nxt: return ''
     when = daystr(nxt['date'])
     if naver:
         return (f'<p><br></p><p style="text-align:center;color:#8b847a">· · ·</p><p><b><span style="font-size:17px;color:#7a5c3e">📮 다음 편 예고 · {when}</span></b></p>'
-                f'<p><b>{html.escape(nxt["title"])}</b></p>{nb_para(meta["teaser"])}<p><span style="color:#8b847a">이웃 추가해 두시면 새 글이 올라올 때 알려 드려요.</span></p>')
+                f'<p><b>{html.escape(nxt["title"])}</b></p>{nb_para(meta["teaser"]) if mode == 'nb' else GH_P + inline(meta["teaser"]) + '</p>'}<p><span style="color:#8b847a">이웃 추가해 두시면 새 글이 올라올 때 알려 드려요.</span></p>')
     link = f'../{nxt["slug"]}/' if nxt.get('slug') else ''
     head = f'<a href="{link}" class="tz" data-date="{nxt["date"]}">{html.escape(nxt["title"])}</a>' if link else html.escape(nxt['title'])
     return f'<aside class="teaser"><div class="th">📮 다음 편 예고 · <span>{when}</span></div><div class="tt">{head}</div><p>{inline(meta["teaser"])}</p></aside>'
@@ -314,15 +319,16 @@ def essays(ver):
         done[meta['no']] = meta
         d = os.path.join(OUT, 'essays', meta['slug']); os.makedirs(d, exist_ok=True)
         tail = f'<p style="text-align:right;color:#8b847a">— Lab장 (시뮬라티오 랩)</p>' + EMPTY + f'<p><span style="color:#8b847a">이 생각이 시작된 실험, 직접 돌려 보기 →</span> <a href="{meta["link"]}">{meta["link"].replace("https://", "")}</a></p>'
-        nb = render(body, naver='nb') + EMPTY * 2 + tail
+        nb = render(body, naver='gh') + EMPTY * 2 + tail
+        nm = render(body, naver='nb') + EMPTY * 2 + tail
         inner = f'''<main class="post"><div class="sched">📝 {html.escape(meta.get('status', '대기'))} · 네이버 예약 {html.escape(meta.get('planned', ''))}</div>
 <div class="cat">실험 뒤의 생각 · {meta['no']}편 · 짝 실험 글 <a href="../../p/{meta['pair']}/">{meta['pair']}</a></div>
 <h1>{html.escape(meta['title'])}</h1>
 <section id="naver" class="naver">
 <h2>네이버 블로그로 옮기기</h2>
 <p>① 제목 → 제목 칸 ⌘V · ② 본문 → 본문 ⌘V · ③ 태그 → 발행 창 태그 칸 · ④ 카테고리 <b>실험 뒤의 생각</b> · 주제 <b>일상·생각</b> · ⑤ 소제목은 굵게+마루부리, 큰 문장(!!)은 가운데 정렬 · ⑥ 발행 뒤 status를 '발행'으로</p>
-<div class="nbtn"><button data-copy="nt">① 제목 복사</button><button data-copy="nb">② 본문 복사</button><button data-copy="ng">③ 태그 한꺼번에 복사</button><span class="msg"></span></div>
-<div id="nt" class="cp">{html.escape(meta['title'])}</div><div id="nb" class="cp">{nb}</div>{tagbox(meta['tags'])}
+<div class="nbtn"><button data-copy="nt">① 제목 복사</button><button data-copy="nb">② 본문 복사 (블로그와 같게)</button><button data-copy="nm" class="alt">②′ 휴대폰용 (문장마다 줄)</button><button data-copy="ng">③ 태그 한꺼번에 복사</button><span class="msg"></span></div>
+<div id="nt" class="cp">{html.escape(meta['title'])}</div><div id="nb" class="cp">{nb}</div><div id="nm" class="cp">{nm}</div>{tagbox(meta['tags'])}
 </section>
 <article id="body">{render(body, base='../../')}</article><p class="sign">— Lab장</p></main>'''
         open(os.path.join(d, 'index.html'), 'w', encoding='utf-8').write(page(meta['title'], '../../', inner))
@@ -369,7 +375,8 @@ def main():
         sched = '' if meta['published'] else f'<div class="sched">⏰ 예약 글 · {daystr(meta["date"])} 공개 예정</div>'
         PH = dict(photos=meta['photos'], extra=meta['extra'])
         nxt_meta = next_ or next((x for x in PLAN if x['no'] == meta['no'] + 1), None)
-        naverhtml = quick(meta, naver=True) + render(body, naver='nb', **PH) + '<p style="text-align:right;color:#8b847a">— 시뮬라티오 랩, Lab장</p>' + more_box(meta, naver=True) + teaser(meta, nxt_meta, naver=True)
+        nbody = lambda mode: quick(meta, naver=True) + EMPTY + render(body, naver=mode, **PH) + EMPTY + '<p style="text-align:right;color:#8b847a">— 시뮬라티오 랩, Lab장</p>' + more_box(meta, naver=True) + teaser(meta, nxt_meta, naver=True, mode=mode)
+        naverhtml, mobilehtml = nbody('gh'), nbody('nb')
         page = HEAD.format(title=html.escape(meta['title']) + ' | ' + BLOG, desc=html.escape(meta['excerpt']), image=SITE + meta['cover'], ogtype='article', blog=BLOG, base=base, ver=ver) + f'''
 <main class="post">{sched}
 <div class="cat">{html.escape(meta['category'])} · {meta['no']}편</div>
@@ -382,8 +389,8 @@ def main():
 <section id="naver" class="naver" hidden>
 <h2>네이버 블로그로 옮기기</h2>
 <p>① 제목 → 제목 칸 ⌘V · ② 본문 → 본문 ⌘V (사진도 함께 붙어요. 안 붙으면 사진만 따로 올리기) · ③ 태그 → 발행 창 태그 칸 · ④ 카테고리 <b>돌려 보는 실험실</b> · 주제 <b>교육·학문</b> · ⑤ 발행 뒤 네이버 주소를 content/{meta['no']:02d}-{meta['slug']}.md 의 naver_url에 적기</p>
-<div class="nbtn"><button data-copy="nt">① 제목 복사</button><button data-copy="nb">② 본문 복사</button><button data-copy="ng">③ 태그 한꺼번에 복사</button><span class="msg"></span></div>
-<div id="nt" class="cp">{html.escape(meta['title'])}</div><div id="nb" class="cp">{naverhtml}</div>{tagbox(meta['tags'])}
+<div class="nbtn"><button data-copy="nt">① 제목 복사</button><button data-copy="nb">② 본문 복사 (블로그와 같게)</button><button data-copy="nm" class="alt">②′ 휴대폰용 (문장마다 줄)</button><button data-copy="ng">③ 태그 한꺼번에 복사</button><span class="msg"></span></div>
+<div id="nt" class="cp">{html.escape(meta['title'])}</div><div id="nb" class="cp">{naverhtml}</div><div id="nm" class="cp">{mobilehtml}</div>{tagbox(meta['tags'])}
 </section>{photo_box(meta)}</main>''' + FOOT.format(base=base, ver=ver)
         open(os.path.join(d, 'index.html'), 'w', encoding='utf-8').write(page)
     plan = json.load(open(os.path.join(SRC, 'plan.json'), encoding='utf-8'))
