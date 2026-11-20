@@ -9,7 +9,7 @@ tags: 유령정체, 차막히는이유, 에세이, 여백, 일상철학, 미루�
 cover: img/01/1-ring.jpg
 experiment: traffic
 video: https://youtube.com/shorts/aqtgXFAaDUQ
-naver_url:
+naver_url: https://blog.naver.com/simulatiolab/224483683652
 teaser: 1943년, 돌아온 폭격기의 날개와 몸통은 총알 구멍투성이였고 엔진은 깨끗했다. 철판을 딱 두 곳에만 붙일 수 있다면 어디를 막겠는가? 다음 편을 읽기 전에 답을 하나 골라 두자. 날개, 몸통, 엔진. 대부분은 틀린다.
 ---
 브레이크등이 끝없이 이어져 있었다. 라디오에서는 같은 보험 광고가 세 번째 흘러나왔다.

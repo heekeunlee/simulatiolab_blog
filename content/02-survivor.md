@@ -9,7 +9,7 @@ tags: 생존자편향, 총알구멍, 에이브러햄월드, 2차세계대전, �
 cover: img/02/plane.jpg
 experiment: survivor
 video: https://youtu.be/UEsRhXsq7wA
-naver_url:
+naver_url: https://blog.naver.com/simulatiolab/224483693692
 teaser: 배차 간격 5분이라던 버스가 20분 만에 두 대 나란히 온다. 기사님 잘못도, 배차 실수도 아니다. 출발할 때 겨우 2초 늦은 버스 한 대가 6시간 뒤 노선 전체에 무슨 일을 벌이는지, 컴퓨터 속에서 끝까지 지켜보았다.
 ---
 성공한 사람의 이야기를 들으면 마음이 두 갈래로 갈라진다. 하나는 "나도 저렇게 하면 되겠구나" 하는 설렘. 다른 하나는 "나는 왜 아직 저기까지 못 갔지" 하는 조급함.
