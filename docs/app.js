@@ -23,6 +23,11 @@
       setTimeout(() => (msg.textContent = ''), 2500);
     }));
   });
+  document.querySelectorAll('.tags1 .tg').forEach((b) => b.addEventListener('click', async () => {
+    const msg = b.closest('section').querySelector('.msg');
+    try { await navigator.clipboard.writeText(b.dataset.tag); b.classList.add('done'); msg.textContent = '#' + b.dataset.tag + ' 복사됨 ✓ → 태그 칸 ⌘V, 엔터'; }
+    catch (e) { msg.textContent = '복사가 막혔어요. 직접 입력해 주세요'; }
+  }));
   document.querySelectorAll('a.tz').forEach((a) => { if (a.dataset.date > T && !location.hash) a.removeAttribute('href'); });
   document.querySelectorAll('.pn a.nx').forEach((a) => { if (a.dataset.date > T && !location.hash) a.style.visibility = 'hidden'; });
 

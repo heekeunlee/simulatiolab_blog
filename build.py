@@ -291,6 +291,13 @@ def photo_box(meta):
 <ol class="slots">{rows}</ol><textarea id="pq" class="cp">{html.escape(req)}</textarea></section>'''
 
 
+def tagbox(tags):
+    """네이버 태그: 한꺼번에(#태그 #태그) + 하나씩 누르는 칩(누르면 복사 → 태그 칸 ⌘V → 엔터)"""
+    chips = ''.join(f'<button class="tg" data-tag="{html.escape(t)}">#{html.escape(t)}</button>' for t in tags)
+    return (f'<textarea id="ng" class="cp">{" ".join("#" + t for t in tags)}</textarea>'
+            f'<div class="tags1"><p>③ 태그가 한 덩어리로 들어가면: 아래를 <b>하나씩 눌러 복사 → 태그 칸 ⌘V → 엔터</b> (누른 건 흐려져요)</p>{chips}</div>')
+
+
 def essays(ver):
     """content/essays: '실험 뒤의 생각' 작성 대기실(네이버가 원본 → noindex). /essays/ 안내·목록, /essays/<slug>/ 네이버 옮기기"""
     E = os.path.join(SRC, 'essays')
@@ -314,8 +321,8 @@ def essays(ver):
 <section id="naver" class="naver">
 <h2>네이버 블로그로 옮기기</h2>
 <p>① 제목 → 제목 칸 ⌘V · ② 본문 → 본문 ⌘V · ③ 태그 → 발행 창 태그 칸 · ④ 카테고리 <b>실험 뒤의 생각</b> · 주제 <b>일상·생각</b> · ⑤ 소제목은 굵게+마루부리, 큰 문장(!!)은 가운데 정렬 · ⑥ 발행 뒤 status를 '발행'으로</p>
-<div class="nbtn"><button data-copy="nt">① 제목 복사</button><button data-copy="nb">② 본문 복사</button><button data-copy="ng">③ 태그 복사</button><span class="msg"></span></div>
-<div id="nt" class="cp">{html.escape(meta['title'])}</div><div id="nb" class="cp">{nb}</div><textarea id="ng" class="cp">{', '.join(meta['tags'])}</textarea>
+<div class="nbtn"><button data-copy="nt">① 제목 복사</button><button data-copy="nb">② 본문 복사</button><button data-copy="ng">③ 태그 한꺼번에 복사</button><span class="msg"></span></div>
+<div id="nt" class="cp">{html.escape(meta['title'])}</div><div id="nb" class="cp">{nb}</div>{tagbox(meta['tags'])}
 </section>
 <article id="body">{render(body, base='../../')}</article><p class="sign">— Lab장</p></main>'''
         open(os.path.join(d, 'index.html'), 'w', encoding='utf-8').write(page(meta['title'], '../../', inner))
@@ -374,9 +381,9 @@ def main():
 {more_box(meta, base=base)}{teaser(meta, nxt_meta)}<div class="tags">{tags}</div>{nav}
 <section id="naver" class="naver" hidden>
 <h2>네이버 블로그로 옮기기</h2>
-<p>① 제목 → 제목 칸 ⌘V · ② 본문 → 본문 ⌘V (사진도 함께 붙어요. 안 붙으면 사진만 따로 올리기) · ③ 태그 → 발행 창 태그 칸 · ④ 카테고리 "{html.escape(meta['category'])}" · ⑤ 발행 뒤 네이버 주소를 content/{meta['no']:02d}-{meta['slug']}.md 의 naver_url에 적기</p>
-<div class="nbtn"><button data-copy="nt">① 제목 복사</button><button data-copy="nb">② 본문 복사</button><button data-copy="ng">③ 태그 복사</button><span class="msg"></span></div>
-<div id="nt" class="cp">{html.escape(meta['title'])}</div><div id="nb" class="cp">{naverhtml}</div><textarea id="ng" class="cp">{', '.join(meta['tags'])}</textarea>
+<p>① 제목 → 제목 칸 ⌘V · ② 본문 → 본문 ⌘V (사진도 함께 붙어요. 안 붙으면 사진만 따로 올리기) · ③ 태그 → 발행 창 태그 칸 · ④ 카테고리 <b>돌려 보는 실험실</b> · 주제 <b>교육·학문</b> · ⑤ 발행 뒤 네이버 주소를 content/{meta['no']:02d}-{meta['slug']}.md 의 naver_url에 적기</p>
+<div class="nbtn"><button data-copy="nt">① 제목 복사</button><button data-copy="nb">② 본문 복사</button><button data-copy="ng">③ 태그 한꺼번에 복사</button><span class="msg"></span></div>
+<div id="nt" class="cp">{html.escape(meta['title'])}</div><div id="nb" class="cp">{naverhtml}</div>{tagbox(meta['tags'])}
 </section>{photo_box(meta)}</main>''' + FOOT.format(base=base, ver=ver)
         open(os.path.join(d, 'index.html'), 'w', encoding='utf-8').write(page)
     plan = json.load(open(os.path.join(SRC, 'plan.json'), encoding='utf-8'))

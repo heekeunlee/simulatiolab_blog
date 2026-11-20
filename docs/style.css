@@ -92,3 +92,4 @@ figure.photo img{border:0;border-radius:6px}
 @media (max-width:600px){.qrs{grid-template-columns:repeat(2,1fr)}}
 .prof .links a{display:block;padding:6px 0;font-size:14px;font-weight:700;text-decoration:none}
 .prof .qrimg{width:100%;border-radius:10px;border:1px solid var(--line);margin:8px 0 14px}
+.tags1{margin-top:12px}.tags1 p{font-size:13px;color:#8b847a;margin:0 0 6px}.tags1 .tg{font:700 13px "Nanum Gothic",sans-serif;border:1px solid var(--green);background:transparent;color:var(--green);border-radius:999px;padding:6px 10px;margin:0 6px 6px 0;cursor:pointer}.tags1 .tg.done{opacity:.35}
